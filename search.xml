@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>LLM輔助論文檢索機器人</title>
+    <url>/Team-Project/LLM-paper-search/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview:"></a>Overview:</h1><p>此專案製作”論文綜整與檢索的Discord Bot”。透過selenium   爬蟲收集最新的論文並解析其內容。利用RAG LLM技術，以本地資料庫的形式供LLM搜索，讓LLM可以檢索出符合使用者需求敘述且足夠新的論文，最後以discord Bot的方式製作使用者介面，與使用者互動及呈現資料。</p>
+<p>示意圖:<br><img src="/Team-Project/LLM-paper-search/demo.png" alt=""></p>
+<p>介紹影片:<br><div class="video-container"><iframe src="https://www.youtube.com/embed/8r9ehgZSaWo" frameborder="0" loading="lazy" allowfullscreen></iframe></div></p>
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation:"></a>Motivation:</h1><p>因為GPT3.5/4只有到2021/2023的資料庫，不足以供應最新的論文需求，因此製作此程式，用來提供最新論文的搜索。</p>
+<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>使用selenium製作爬蟲，把arXiv網站的2024年論文資料抓下來。目前只抓了title, abstract, link，因為如果存取全文，在搜索及資料庫建置上需要花上非常多的時間以及金錢，故只留下用來搜索的重要部分。</p>
+<h2 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h2><p>使用langchain做RAG LLM，採用GPT3.5模型，做了5種prompting enginerring，並另外做了無法搜索成功的例外處理。<br>使用者輸入任意的關鍵字、問題等，模型將自動將其轉換為搜尋論文的問題，並交由LLM模型在爬蟲得到的資料庫中搜索，回傳英文以及中文的’title, summery, tag, link’。</p>
+<h2 id="Discord-Bot"><a href="#Discord-Bot" class="headerlink" title="Discord Bot"></a>Discord Bot</h2><p>使用者介面，使用者可利用指令的方式，給予模型輸入，模型會以Discord Channel Message的方式做出回覆，並且有中英文翻譯的功能。</p>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p>主要採用3種評估方式: 格式正確率、內容正確率、內容相關率</p>
+<ul>
+<li>格式正確率: 輸出是否與預期格式相符</li>
+<li>內容正確率: 內容是否全部正確，沒有編造、錯誤訊息</li>
+<li>內容相關率: 內容是否與使用者的問題相關</li>
+</ul>
+<p>評估結果:</p>
+<ul>
+<li>格式正確率: 93.3%(28/30)</li>
+<li>內容正確率: 13.3%(4/30)</li>
+<li>內容相關率: 96.6%(29/30)</li>
+</ul>
+<p>註: 內容正確率中，分析30次試驗發現title、summery、tag都沒有出錯，出錯的部分都是link</p>
+<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p>我: 關於LLM的全部工作，串接LLM與爬蟲、Discord Bot<br>組員1: 製作爬蟲，爬取資料<br>組員2: 製作Disocrd Bot介面</p>
+<h1 id="Detail"><a href="#Detail" class="headerlink" title="Detail"></a>Detail</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Intro-AI-Final-Project">https://github.com/youzhe0305/Intro-AI-Final-Project</a><br>裡面有完整的程式碼(不含資料庫)，以及報告、簡報</p>
+]]></content>
+      <categories>
+        <category>Team-Project</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>RAG</tag>
+        <tag>Crawler</tag>
+        <tag>Discord Bot</tag>
+        <tag>Bot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>&lt;演算法筆記&gt; BIT資料結構</title>
     <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-BIT/</url>
     <content><![CDATA[<p>BIT(Binary Indexed Tree)，樹狀數組，用來維護區間的資料結構，一般情況下，我們會用它處理單點修改區間查詢的區間加值問題，當然他也可以處理更複雜的問題，不過就要搭配差分等，其他的資料結構，這裡暫且不談。</p>
@@ -30,27 +67,6 @@
       </tags>
   </entry>
   <entry>
-    <title>&lt;演算法筆記&gt; 並查集資料結構</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Disjoint-Set/</url>
-    <content><![CDATA[<p>並查集(Disjoint-set)，用來處理物品是否同一群的資料結構，他可以做到合併、查詢集合的功能，所以稱為並查集。</p>
-<p>我們透過紀錄每個點的父節點來達成，當兩個點被歸類到同一集合時，我們以這個集合的根最為父節點，我這裡稱為最終父節點。</p>
-<p>查詢時，如果有兩個點的最終父節點相同，即代表他們在同個集合裡。</p>
-<p>合併時，把其中一個集合的最終父節點，定為另一個集合的最終父節點，讓兩者最終父節點相同，即達成合併。</p>
-<p>另外，合併有個優化的方法，稱為啟發式合併，在啟發式合併裡，我們選擇把比較小的集合併到比較大的集合中，這樣當這個比較小的集合要更新成新的父節點時，只要走更少的路。</p>
-<p>這東西直接看code會更好懂一點。</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code"></a>示範code</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> p[MAXN]; <span class="comment">// 節點的父節點</span></span><br><span class="line"><span class="type">int</span> s[MAXN]; <span class="comment">// 集合大小(size)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123; <span class="comment">//　初始化先把自己的父節點設為自己，並把集合大小設為1</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		p[i] = i, s[i] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> v)</span></span>&#123; <span class="comment">// 查詢父節點</span></span><br><span class="line">	<span class="comment">// 看父節點是不是自己，不是就往上找父節點，直到最終父節點(父節點=自己)</span></span><br><span class="line">	<span class="keyword">return</span> p[v] == v ? v : p[v] = <span class="built_in">find</span>(p[v]); <span class="comment">// 順便把點的父節點更新成最終父節點</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">uni</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>&#123; <span class="comment">// 合併兩個集合</span></span><br><span class="line">	<span class="comment">// 讓a集合的最終父節點，變成b集合的最終父節點</span></span><br><span class="line">	<span class="comment">//  讓a集合並到b集合上</span></span><br><span class="line">	<span class="type">int</span> pa = <span class="built_in">find</span>(a), pb = <span class="built_in">find</span>(b);</span><br><span class="line">	p[pa] = pb;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">uni_inspire</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span>&#123; <span class="comment">// 啟發式合併版本</span></span><br><span class="line">	<span class="type">int</span> pa = <span class="built_in">find</span>(a), pb = <span class="built_in">find</span>(b);</span><br><span class="line">	<span class="keyword">if</span>(s[pa]&gt;s[pb]) <span class="built_in">swap</span>(pa,pb) <span class="comment">// 保持b團體更大</span></span><br><span class="line">	p[pa] = pb; <span class="comment">// 把小的a集合並到b集合上</span></span><br><span class="line">	s[pb] += s[pa]; <span class="comment">// 把size相加</span></span><br><span class="line">	s[pa] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>圖論</tag>
-        <tag>集合</tag>
-        <tag>並查集</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>&lt;演算法筆記&gt; Dijkstra單點源最短路演算法</title>
     <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Dijkstra/</url>
     <content><![CDATA[<p>Dijkstra演算法，戴克斯特拉演算法，用來解決單點源最短路問題的演算法。</p>
@@ -69,6 +85,27 @@
         <tag>圖論</tag>
         <tag>最短路</tag>
         <tag>Dijkstra</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>&lt;演算法筆記&gt; 並查集資料結構</title>
+    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Disjoint-Set/</url>
+    <content><![CDATA[<p>並查集(Disjoint-set)，用來處理物品是否同一群的資料結構，他可以做到合併、查詢集合的功能，所以稱為並查集。</p>
+<p>我們透過紀錄每個點的父節點來達成，當兩個點被歸類到同一集合時，我們以這個集合的根最為父節點，我這裡稱為最終父節點。</p>
+<p>查詢時，如果有兩個點的最終父節點相同，即代表他們在同個集合裡。</p>
+<p>合併時，把其中一個集合的最終父節點，定為另一個集合的最終父節點，讓兩者最終父節點相同，即達成合併。</p>
+<p>另外，合併有個優化的方法，稱為啟發式合併，在啟發式合併裡，我們選擇把比較小的集合併到比較大的集合中，這樣當這個比較小的集合要更新成新的父節點時，只要走更少的路。</p>
+<p>這東西直接看code會更好懂一點。</p>
+<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code"></a>示範code</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> p[MAXN]; <span class="comment">// 節點的父節點</span></span><br><span class="line"><span class="type">int</span> s[MAXN]; <span class="comment">// 集合大小(size)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123; <span class="comment">//　初始化先把自己的父節點設為自己，並把集合大小設為1</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		p[i] = i, s[i] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> v)</span></span>&#123; <span class="comment">// 查詢父節點</span></span><br><span class="line">	<span class="comment">// 看父節點是不是自己，不是就往上找父節點，直到最終父節點(父節點=自己)</span></span><br><span class="line">	<span class="keyword">return</span> p[v] == v ? v : p[v] = <span class="built_in">find</span>(p[v]); <span class="comment">// 順便把點的父節點更新成最終父節點</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">uni</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>&#123; <span class="comment">// 合併兩個集合</span></span><br><span class="line">	<span class="comment">// 讓a集合的最終父節點，變成b集合的最終父節點</span></span><br><span class="line">	<span class="comment">//  讓a集合並到b集合上</span></span><br><span class="line">	<span class="type">int</span> pa = <span class="built_in">find</span>(a), pb = <span class="built_in">find</span>(b);</span><br><span class="line">	p[pa] = pb;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">uni_inspire</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span>&#123; <span class="comment">// 啟發式合併版本</span></span><br><span class="line">	<span class="type">int</span> pa = <span class="built_in">find</span>(a), pb = <span class="built_in">find</span>(b);</span><br><span class="line">	<span class="keyword">if</span>(s[pa]&gt;s[pb]) <span class="built_in">swap</span>(pa,pb) <span class="comment">// 保持b團體更大</span></span><br><span class="line">	p[pa] = pb; <span class="comment">// 把小的a集合並到b集合上</span></span><br><span class="line">	s[pb] += s[pa]; <span class="comment">// 把size相加</span></span><br><span class="line">	s[pa] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+]]></content>
+      <categories>
+        <category>演算法筆記</category>
+      </categories>
+      <tags>
+        <tag>圖論</tag>
+        <tag>集合</tag>
+        <tag>並查集</tag>
       </tags>
   </entry>
   <entry>
@@ -150,6 +187,28 @@
       </tags>
   </entry>
   <entry>
+    <title>&lt;演算法筆記&gt; Prim最小生成樹演算法</title>
+    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Prim/</url>
+    <content><![CDATA[<h1 id="臨時打字用"><a href="#臨時打字用" class="headerlink" title="臨時打字用"></a>臨時打字用</h1><p>Prim，普林演算法，用類似Dijkstra的方式，找出一張圖裡面，能連到所有邊的樹中，權值最小的，也就是<a href="https://zh.wikipedia.org/zh-tw/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91">最小生成樹(MST)</a></p>
+<p><img src="/演算法教學/algorithm-Prim/MST.PNG" alt=""></p>
+<p>首先，類似於Dijkstra的作法，先從圖中挑一個點，把邊都丟進priority_queue中，找出目前的最小邊。</p>
+<p>因為我們保證每個點都會被用到所以要連接到一個點，可以從其他任意點過來，也就是可以挑這個點的任意邊。那自然我們會挑最小的那條邊。</p>
+<p>接著我們看這個邊連到誰，把邊丟進priority_queue裡面，繼續挑最小的往下做。如果遇到挑最小邊可能成環的狀況，就不要挑這條邊。</p>
+<p>因為挑了意味著必須把另一條相對的邊去掉，但是其他會成環的邊，一定是在最小生成樹內，也就是priority_queue篩選出來比這個邊更小的邊，才會形成環，所以這個替換必然會造成權值更大，所以不挑。</p>
+<p>ex:<br><img src="/演算法教學/algorithm-Prim/Prim.PNG" alt=""><br>當我們在挑下一條邊時，最小邊是3，但是他會連回到A點形成環。如果要把這個3的最小邊接起來，勢必要去掉1或2這兩條邊，那這個替換顯然不好，所以我們改挑下一條長度4的邊</p>
+<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><p>(以上圖作為範例輸入輸出)<br>時間複雜度$O(NlogN)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pii pair<span class="string">&lt;int,int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> F first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line">vector&lt;pii&gt; vec[MAXN];</span><br><span class="line"><span class="type">int</span> vis[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Prim</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt;&gt; pq; <span class="comment">// 用來排列目前最小邊</span></span><br><span class="line">	pq.<span class="built_in">push</span>(<span class="number">0</span>,<span class="number">1</span>) <span class="comment">// 放入一個點當源點</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(!pq.<span class="built_in">empty</span>())&#123;</span><br><span class="line"></span><br><span class="line">		pii u = pq.<span class="built_in">top</span>();</span><br><span class="line">		pq.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="keyword">if</span>(vis[u.S]) <span class="keyword">continue</span>; <span class="comment">//這個點已經被挑過</span></span><br><span class="line">		vis[u.S] = <span class="number">1</span>;</span><br><span class="line">		ans += u.F <span class="comment">// 加入權值</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>(pii i:vec[u])&#123;</span><br><span class="line">			<span class="type">int</span> point = i.F, w = i.S;</span><br><span class="line">			pq.<span class="built_in">push</span>(&#123;w,point&#125;) <span class="comment">// 權值放前面，來能用來排序</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">	<span class="type">int</span> a,b,w;</span><br><span class="line">	cin&gt;&gt;a&gt;&gt;b,w;</span><br><span class="line">	vec[a].<span class="built_in">push_back</span>(&#123;b,w&#125;);</span><br><span class="line">	vec[b].<span class="built_in">push_back</span>(&#123;a,w&#125;); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cout&lt;&lt;<span class="built_in">Prim</span>()&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">input:</span><br><span class="line">5 6</span><br><span class="line">1 3 5</span><br><span class="line">1 4 1</span><br><span class="line">2 4 7122</span><br><span class="line">2 5 2</span><br><span class="line">3 5 5</span><br><span class="line">4 5 5</span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">output:</span><br><span class="line">13</span><br></pre></td></tr></table></figure></p>
+<hr>
+]]></content>
+      <categories>
+        <category>演算法筆記</category>
+      </categories>
+      <tags>
+        <tag>圖論</tag>
+        <tag>最小生成樹</tag>
+        <tag>Prim</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>&lt;演算法筆記&gt; SPFA單點源最短路演算法</title>
     <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-SPFA/</url>
     <content><![CDATA[<p>SPFA(Shortest Path Faster Algorithm)，最短路徑快速算法，帶有queue優化的Bellman-Ford算法。(因為SPFA比較常用，就直接講SPFA，Bellman-Ford就請有興趣的人去再去研究)</p>
@@ -197,28 +256,6 @@
         <tag>資料結構</tag>
         <tag>區間</tag>
         <tag>ST表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>&lt;演算法筆記&gt; Prim最小生成樹演算法</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Prim/</url>
-    <content><![CDATA[<h1 id="臨時打字用"><a href="#臨時打字用" class="headerlink" title="臨時打字用"></a>臨時打字用</h1><p>Prim，普林演算法，用類似Dijkstra的方式，找出一張圖裡面，能連到所有邊的樹中，權值最小的，也就是<a href="https://zh.wikipedia.org/zh-tw/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91">最小生成樹(MST)</a></p>
-<p><img src="/演算法教學/algorithm-Prim/MST.PNG" alt=""></p>
-<p>首先，類似於Dijkstra的作法，先從圖中挑一個點，把邊都丟進priority_queue中，找出目前的最小邊。</p>
-<p>因為我們保證每個點都會被用到所以要連接到一個點，可以從其他任意點過來，也就是可以挑這個點的任意邊。那自然我們會挑最小的那條邊。</p>
-<p>接著我們看這個邊連到誰，把邊丟進priority_queue裡面，繼續挑最小的往下做。如果遇到挑最小邊可能成環的狀況，就不要挑這條邊。</p>
-<p>因為挑了意味著必須把另一條相對的邊去掉，但是其他會成環的邊，一定是在最小生成樹內，也就是priority_queue篩選出來比這個邊更小的邊，才會形成環，所以這個替換必然會造成權值更大，所以不挑。</p>
-<p>ex:<br><img src="/演算法教學/algorithm-Prim/Prim.PNG" alt=""><br>當我們在挑下一條邊時，最小邊是3，但是他會連回到A點形成環。如果要把這個3的最小邊接起來，勢必要去掉1或2這兩條邊，那這個替換顯然不好，所以我們改挑下一條長度4的邊</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><p>(以上圖作為範例輸入輸出)<br>時間複雜度$O(NlogN)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pii pair<span class="string">&lt;int,int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> F first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line">vector&lt;pii&gt; vec[MAXN];</span><br><span class="line"><span class="type">int</span> vis[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Prim</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt;&gt; pq; <span class="comment">// 用來排列目前最小邊</span></span><br><span class="line">	pq.<span class="built_in">push</span>(<span class="number">0</span>,<span class="number">1</span>) <span class="comment">// 放入一個點當源點</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(!pq.<span class="built_in">empty</span>())&#123;</span><br><span class="line"></span><br><span class="line">		pii u = pq.<span class="built_in">top</span>();</span><br><span class="line">		pq.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="keyword">if</span>(vis[u.S]) <span class="keyword">continue</span>; <span class="comment">//這個點已經被挑過</span></span><br><span class="line">		vis[u.S] = <span class="number">1</span>;</span><br><span class="line">		ans += u.F <span class="comment">// 加入權值</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>(pii i:vec[u])&#123;</span><br><span class="line">			<span class="type">int</span> point = i.F, w = i.S;</span><br><span class="line">			pq.<span class="built_in">push</span>(&#123;w,point&#125;) <span class="comment">// 權值放前面，來能用來排序</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">	<span class="type">int</span> a,b,w;</span><br><span class="line">	cin&gt;&gt;a&gt;&gt;b,w;</span><br><span class="line">	vec[a].<span class="built_in">push_back</span>(&#123;b,w&#125;);</span><br><span class="line">	vec[b].<span class="built_in">push_back</span>(&#123;a,w&#125;); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cout&lt;&lt;<span class="built_in">Prim</span>()&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">input:</span><br><span class="line">5 6</span><br><span class="line">1 3 5</span><br><span class="line">1 4 1</span><br><span class="line">2 4 7122</span><br><span class="line">2 5 2</span><br><span class="line">3 5 5</span><br><span class="line">4 5 5</span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">output:</span><br><span class="line">13</span><br></pre></td></tr></table></figure></p>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>圖論</tag>
-        <tag>最小生成樹</tag>
-        <tag>Prim</tag>
       </tags>
   </entry>
   <entry>
