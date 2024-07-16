@@ -1,55 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>LLM輔助論文檢索機器人</title>
-    <url>/Team-Project/LLM-paper-search/</url>
-    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作”論文綜整與檢索的Discord Bot”。透過selenium爬蟲收集最新的論文並解析其內容。利用RAG LLM技術，以本地資料庫的形式供LLM搜索，讓LLM可以檢索出符合使用者需求敘述且足夠新的論文，最後以discord Bot的方式製作使用者介面，與使用者互動及呈現資料。</p>
-<h3 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h3><ul>
-<li>Crawler<ul>
-<li>selenium   </li>
-</ul>
-</li>
-<li>LLM<ul>
-<li>LangChain</li>
-</ul>
-</li>
-<li>Discord Bot</li>
-</ul>
-<p>示意圖:<br><img src="/Team-Project/LLM-paper-search/demo.png" alt=""></p>
-<p>介紹影片:<br><div class="video-container"><iframe src="https://www.youtube.com/embed/8r9ehgZSaWo" frameborder="0" loading="lazy" allowfullscreen></iframe></div></p>
-<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一下學期，修習”人工智慧概論”之專題<br>因為GPT3.5/4只有到2021/2023的資料庫，不足以供應最新的論文需求，因此製作此程式，用來提供最新論文的搜索。</p>
-<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>使用<strong>selenium</strong>製作爬蟲，把<strong>arXiv</strong>網站的<strong>2024</strong>年論文資料抓下來。目前只抓了title, abstract, link，因為如果存取全文，在搜索及資料庫建置上需要花上非常多的時間以及金錢，故只留下用來搜索的重要部分。</p>
-<h2 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h2><p>使用<strong>langchain</strong>做RAG LLM，採用<strong>GPT3.5</strong>模型，做了<strong>5種prompting enginerring</strong>，並另外做了無法搜索成功的例外處理。<br>使用者輸入任意的關鍵字、問題等，模型將自動將其轉換為搜尋論文的問題，並交由LLM模型在爬蟲得到的資料庫中搜索，回傳英文以及中文的’title, summery, tag, link’。</p>
-<h2 id="Discord-Bot"><a href="#Discord-Bot" class="headerlink" title="Discord Bot"></a>Discord Bot</h2><p>使用者介面，使用者可利用指令的方式，給予模型輸入，模型會以Discord Channel Message的方式做出回覆，並且有中英文翻譯的功能。</p>
-<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p>主要採用3種評估方式: 格式正確率、內容正確率、內容相關率</p>
-<ul>
-<li>格式正確率: 輸出是否與預期格式相符</li>
-<li>內容正確率: 內容是否全部正確，沒有編造、錯誤訊息</li>
-<li>內容相關率: 內容是否與使用者的問題相關</li>
-</ul>
-<p>評估結果:</p>
-<ul>
-<li>格式正確率: 93.3%(28/30)</li>
-<li>內容正確率: 13.3%(4/30)</li>
-<li>內容相關率: 96.6%(29/30)</li>
-</ul>
-<p>註: 內容正確率中，分析30次試驗發現title、summery、tag都沒有出錯，出錯的部分都是link</p>
-<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p>我: 關於LLM的全部工作，串接LLM與爬蟲、Discord Bot<br>組員1: 製作爬蟲，爬取資料<br>組員2: 製作Disocrd Bot介面</p>
-<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Intro-AI-Final-Project">https://github.com/youzhe0305/Intro-AI-Final-Project</a><br>裡面有完整的程式碼(不含資料庫)，以及報告、簡報</p>
-]]></content>
-      <categories>
-        <category>Team-Project</category>
-      </categories>
-      <tags>
-        <tag>LLM</tag>
-        <tag>RAG</tag>
-        <tag>Crawler</tag>
-        <tag>Discord Bot</tag>
-        <tag>Bot</tag>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>&lt;演算法筆記&gt; BIT資料結構</title>
     <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-BIT/</url>
     <content><![CDATA[<p>BIT(Binary Indexed Tree)，樹狀數組，用來維護區間的資料結構，一般情況下，我們會用它處理單點修改區間查詢的區間加值問題，當然他也可以處理更複雜的問題，不過就要搭配差分等，其他的資料結構，這裡暫且不談。</p>
@@ -100,6 +51,24 @@
       </tags>
   </entry>
   <entry>
+    <title>&lt;演算法筆記&gt; Floyd-Warshall多點源最短路演算法</title>
+    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Floyd-Warshall/</url>
+    <content><![CDATA[<p>Floyd-Warshall演算法，弗洛伊德演算法，用來解決多點源最短路問題的演算法。</p>
+<p>相較於Dijkstra及SPFA只能找到對於一個起點的最短路徑，Floyd-Warshall可以用來找到圖上任意點對任意點的最短路徑。</p>
+<p>Floyd-Warshall的概念相對起來好懂很多，就是幹下去就對了，用每一個點去鬆弛每一個點。直接用for迴圈枚舉就行，就直接看code吧</p>
+<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><p>時間複雜度$O(N^3)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">int</span> dp[MAXN]; <span class="comment">// 表示最短距離</span></span><br><span class="line"><span class="type">void</span> Floyd-<span class="built_in">Warshall</span>()&#123;  </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(dp[i][j] &gt; dp[i][k] + dp[k][j])&#123;</span><br><span class="line">                    dp[i][j] = dp[i][k] + dp[k][j]; <span class="comment">// 當可以被鬆弛，則更新</span></span><br><span class="line">                &#125;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<hr>
+]]></content>
+      <categories>
+        <category>演算法筆記</category>
+      </categories>
+      <tags>
+        <tag>圖論</tag>
+        <tag>最短路</tag>
+        <tag>Floyd-Warshall</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>&lt;演算法筆記&gt; 並查集資料結構</title>
     <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Disjoint-Set/</url>
     <content><![CDATA[<p>並查集(Disjoint-set)，用來處理物品是否同一群的資料結構，他可以做到合併、查詢集合的功能，所以稱為並查集。</p>
@@ -118,24 +87,6 @@
         <tag>圖論</tag>
         <tag>集合</tag>
         <tag>並查集</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>&lt;演算法筆記&gt; Floyd-Warshall多點源最短路演算法</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Floyd-Warshall/</url>
-    <content><![CDATA[<p>Floyd-Warshall演算法，弗洛伊德演算法，用來解決多點源最短路問題的演算法。</p>
-<p>相較於Dijkstra及SPFA只能找到對於一個起點的最短路徑，Floyd-Warshall可以用來找到圖上任意點對任意點的最短路徑。</p>
-<p>Floyd-Warshall的概念相對起來好懂很多，就是幹下去就對了，用每一個點去鬆弛每一個點。直接用for迴圈枚舉就行，就直接看code吧</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><p>時間複雜度$O(N^3)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">int</span> dp[MAXN]; <span class="comment">// 表示最短距離</span></span><br><span class="line"><span class="type">void</span> Floyd-<span class="built_in">Warshall</span>()&#123;  </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(dp[i][j] &gt; dp[i][k] + dp[k][j])&#123;</span><br><span class="line">                    dp[i][j] = dp[i][k] + dp[k][j]; <span class="comment">// 當可以被鬆弛，則更新</span></span><br><span class="line">                &#125;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>圖論</tag>
-        <tag>最短路</tag>
-        <tag>Floyd-Warshall</tag>
       </tags>
   </entry>
   <entry>
@@ -180,25 +131,6 @@
       </tags>
   </entry>
   <entry>
-    <title>&lt;演算法筆記&gt; Kruskal最小生成樹演算法</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Kruskal/</url>
-    <content><![CDATA[<p>Kruskal，克魯斯克爾演算法，用貪心的方式，找出一張圖裡面，能連到所有邊的樹中，權值最小的，也就是<a href="https://zh.wikipedia.org/zh-tw/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91">最小生成樹(MST)</a></p>
-<p><img src="/演算法教學/algorithm-Kruskal/MST.PNG" alt=""></p>
-<p>首先，將所有邊排序一遍，依次把最小的邊與其連到的點加入最小生成樹的子圖中，等到所有點都被加入後，就能得到最小生成樹。要注意的是，在加入邊時，要避免子圖中出現環，不然就不會是樹了。</p>
-<p>實作上，我們會利用並查集來檢查點是否已經在最小生成樹裡面，以及是否成環。</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><p>(以上圖作為範例輸入輸出)<br>時間複雜度$O(MlogM)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pip pair<span class="string">&lt;int,pair&lt;int,int&gt;</span>&gt;</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> F first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line">vector&lt;pip&gt; vec; <span class="comment">// 儲存邊</span></span><br><span class="line"><span class="type">int</span> p[MAXN]; <span class="comment">// 父節點</span></span><br><span class="line"><span class="type">int</span> s[MAXN]; <span class="comment">// 集合大小</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		p[i] = i, s[i] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> p[v] == v ? v : p[v] = <span class="built_in">find</span>(p[v]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">uni</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> pa = <span class="built_in">find</span>(a), pb = <span class="built_in">find</span>(b);</span><br><span class="line">	p[pa] = pb;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">kruskal</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(),vec.<span class="built_in">end</span>());</span><br><span class="line">	<span class="keyword">for</span>(pip i:vec)&#123;</span><br><span class="line">		<span class="type">int</span> a = i.S.F, b = i.S.S;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">find</span>(a)==<span class="built_in">find</span>(b)) <span class="keyword">continue</span>;<span class="comment">// 在同個集合下，也就是成環，試著加入重複點</span></span><br><span class="line">		<span class="built_in">uni</span>(a,b);</span><br><span class="line">		ans += i.F; <span class="comment">// 確定加入最小生成樹後，把權重加入答案</span></span><br><span class="line">	<span class="comment">// 當所有邊都跑完，就可以確定所有點都都被加進去</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line"><span class="built_in">init</span>();</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">	<span class="type">int</span> a,b,w;</span><br><span class="line">	cin&gt;&gt;a&gt;&gt;b&gt;&gt;w;</span><br><span class="line">	vec.<span class="built_in">push_back</span>(&#123; w, <span class="built_in">make_pair</span>(a, b) &#125;); <span class="comment">// 加入邊(權重放第一位，才能排序)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cout&lt;&lt;<span class="built_in">kruskal</span>()&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">input:</span><br><span class="line">5 6</span><br><span class="line">1 3 5</span><br><span class="line">1 4 1</span><br><span class="line">2 4 7122</span><br><span class="line">2 5 2</span><br><span class="line">3 5 5</span><br><span class="line">4 5 5</span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">output:</span><br><span class="line">13</span><br></pre></td></tr></table></figure></p>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>圖論</tag>
-        <tag>最小生成樹</tag>
-        <tag>Kruskal</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>&lt;演算法筆記&gt; Prim最小生成樹演算法</title>
     <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Prim/</url>
     <content><![CDATA[<h1 id="臨時打字用"><a href="#臨時打字用" class="headerlink" title="臨時打字用"></a>臨時打字用</h1><p>Prim，普林演算法，用類似Dijkstra的方式，找出一張圖裡面，能連到所有邊的樹中，權值最小的，也就是<a href="https://zh.wikipedia.org/zh-tw/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91">最小生成樹(MST)</a></p>
@@ -218,6 +150,74 @@
         <tag>圖論</tag>
         <tag>最小生成樹</tag>
         <tag>Prim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>&lt;演算法筆記&gt; Kruskal最小生成樹演算法</title>
+    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Kruskal/</url>
+    <content><![CDATA[<p>Kruskal，克魯斯克爾演算法，用貪心的方式，找出一張圖裡面，能連到所有邊的樹中，權值最小的，也就是<a href="https://zh.wikipedia.org/zh-tw/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91">最小生成樹(MST)</a></p>
+<p><img src="/演算法教學/algorithm-Kruskal/MST.PNG" alt=""></p>
+<p>首先，將所有邊排序一遍，依次把最小的邊與其連到的點加入最小生成樹的子圖中，等到所有點都被加入後，就能得到最小生成樹。要注意的是，在加入邊時，要避免子圖中出現環，不然就不會是樹了。</p>
+<p>實作上，我們會利用並查集來檢查點是否已經在最小生成樹裡面，以及是否成環。</p>
+<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><p>(以上圖作為範例輸入輸出)<br>時間複雜度$O(MlogM)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pip pair<span class="string">&lt;int,pair&lt;int,int&gt;</span>&gt;</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> F first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line">vector&lt;pip&gt; vec; <span class="comment">// 儲存邊</span></span><br><span class="line"><span class="type">int</span> p[MAXN]; <span class="comment">// 父節點</span></span><br><span class="line"><span class="type">int</span> s[MAXN]; <span class="comment">// 集合大小</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		p[i] = i, s[i] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> p[v] == v ? v : p[v] = <span class="built_in">find</span>(p[v]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">uni</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> pa = <span class="built_in">find</span>(a), pb = <span class="built_in">find</span>(b);</span><br><span class="line">	p[pa] = pb;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">kruskal</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(),vec.<span class="built_in">end</span>());</span><br><span class="line">	<span class="keyword">for</span>(pip i:vec)&#123;</span><br><span class="line">		<span class="type">int</span> a = i.S.F, b = i.S.S;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">find</span>(a)==<span class="built_in">find</span>(b)) <span class="keyword">continue</span>;<span class="comment">// 在同個集合下，也就是成環，試著加入重複點</span></span><br><span class="line">		<span class="built_in">uni</span>(a,b);</span><br><span class="line">		ans += i.F; <span class="comment">// 確定加入最小生成樹後，把權重加入答案</span></span><br><span class="line">	<span class="comment">// 當所有邊都跑完，就可以確定所有點都都被加進去</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line"><span class="built_in">init</span>();</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">	<span class="type">int</span> a,b,w;</span><br><span class="line">	cin&gt;&gt;a&gt;&gt;b&gt;&gt;w;</span><br><span class="line">	vec.<span class="built_in">push_back</span>(&#123; w, <span class="built_in">make_pair</span>(a, b) &#125;); <span class="comment">// 加入邊(權重放第一位，才能排序)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cout&lt;&lt;<span class="built_in">kruskal</span>()&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">input:</span><br><span class="line">5 6</span><br><span class="line">1 3 5</span><br><span class="line">1 4 1</span><br><span class="line">2 4 7122</span><br><span class="line">2 5 2</span><br><span class="line">3 5 5</span><br><span class="line">4 5 5</span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">output:</span><br><span class="line">13</span><br></pre></td></tr></table></figure></p>
+<hr>
+]]></content>
+      <categories>
+        <category>演算法筆記</category>
+      </categories>
+      <tags>
+        <tag>圖論</tag>
+        <tag>最小生成樹</tag>
+        <tag>Kruskal</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LLM輔助論文檢索機器人</title>
+    <url>/Team-Project/LLM-paper-search/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作”論文綜整與檢索的Discord Bot”。透過selenium爬蟲收集最新的論文並解析其內容。利用RAG LLM技術，以本地資料庫的形式供LLM搜索，讓LLM可以檢索出符合使用者需求敘述且足夠新的論文，最後以discord Bot的方式製作使用者介面，與使用者互動及呈現資料。</p>
+<h3 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h3><ul>
+<li>Crawler<ul>
+<li>selenium   </li>
+</ul>
+</li>
+<li>LLM<ul>
+<li>LangChain</li>
+</ul>
+</li>
+<li>Discord Bot</li>
+</ul>
+<p>示意圖:<br><img src="/Team-Project/LLM-paper-search/demo.png" alt=""></p>
+<p>介紹影片:<br><div class="video-container"><iframe src="https://www.youtube.com/embed/8r9ehgZSaWo" frameborder="0" loading="lazy" allowfullscreen></iframe></div></p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一下學期，修習”人工智慧概論”之專題<br>因為GPT3.5/4只有到2021/2023的資料庫，不足以供應最新的論文需求，因此製作此程式，用來提供最新論文的搜索。</p>
+<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>使用<strong>selenium</strong>製作爬蟲，把<strong>arXiv</strong>網站的<strong>2024</strong>年論文資料抓下來。目前只抓了title, abstract, link，因為如果存取全文，在搜索及資料庫建置上需要花上非常多的時間以及金錢，故只留下用來搜索的重要部分。</p>
+<h2 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h2><p>使用<strong>langchain</strong>做RAG LLM，採用<strong>GPT3.5</strong>模型，做了<strong>5種prompting enginerring</strong>，並另外做了無法搜索成功的例外處理。<br>使用者輸入任意的關鍵字、問題等，模型將自動將其轉換為搜尋論文的問題，並交由LLM模型在爬蟲得到的資料庫中搜索，回傳英文以及中文的’title, summery, tag, link’。</p>
+<h2 id="Discord-Bot"><a href="#Discord-Bot" class="headerlink" title="Discord Bot"></a>Discord Bot</h2><p>使用者介面，使用者可利用指令的方式，給予模型輸入，模型會以Discord Channel Message的方式做出回覆，並且有中英文翻譯的功能。</p>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p>主要採用3種評估方式: 格式正確率、內容正確率、內容相關率</p>
+<ul>
+<li>格式正確率: 輸出是否與預期格式相符</li>
+<li>內容正確率: 內容是否全部正確，沒有編造、錯誤訊息</li>
+<li>內容相關率: 內容是否與使用者的問題相關</li>
+</ul>
+<p>評估結果:</p>
+<ul>
+<li>格式正確率: 93.3%(28/30)</li>
+<li>內容正確率: 13.3%(4/30)</li>
+<li>內容相關率: 96.6%(29/30)</li>
+</ul>
+<p>註: 內容正確率中，分析30次試驗發現title、summery、tag都沒有出錯，出錯的部分都是link</p>
+<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p>我: 關於LLM的全部工作，串接LLM與爬蟲、Discord Bot<br>組員1: 製作爬蟲，爬取資料<br>組員2: 製作Disocrd Bot介面</p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Intro-AI-Final-Project">https://github.com/youzhe0305/Intro-AI-Final-Project</a><br>裡面有完整的程式碼(不含資料庫)，以及報告、簡報</p>
+]]></content>
+      <categories>
+        <category>Team-Project</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>RAG</tag>
+        <tag>Crawler</tag>
+        <tag>Discord Bot</tag>
+        <tag>Bot</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -295,7 +295,7 @@
   </entry>
   <entry>
     <title>新聞推播Discord Bot</title>
-    <url>/Personal-Project/newspaper-dc-bot/</url>
+    <url>/Team-Project/newspaper-dc-bot/</url>
     <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作 “定時推播新聞的Discord Bot”。透過bs4爬蟲、RSS每天收集最新新聞更新資料庫，並定期在Discord頻道做新聞的推播，使用者可以自選想看的新聞種類。新聞資訊將帶有標題、連結</p>
 <h3 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h3><ul>
 <li>Crawler<ul>
@@ -305,7 +305,7 @@
 <li>RSS   </li>
 <li>Discord Bot</li>
 </ul>
-<p>示意圖:<br><img src="/Personal-Project/newspaper-dc-bot/newspaper-UI.png" alt=""></p>
+<p>示意圖:<br><img src="/Team-Project/newspaper-dc-bot/newspaper-UI.png" alt=""></p>
 <h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>SITCON CAMP 2021的黑客松作品，主題為Discord Bot的應用。</p>
 <h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Data-Collection"><a href="#Data-Collection" class="headerlink" title="Data Collection"></a>Data Collection</h2><p>使用<strong>bs4</strong>製作爬蟲，輔以新聞的RSS系統，把<strong>7家新聞網站</strong>的最新資料抓下來。存取了種類、標題、tag等等資訊。</p>
 <h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>將各家不同的種類、tag整合為特定的幾個類別，以便整合之後，供使用者選取。</p>
@@ -314,7 +314,7 @@
 <h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/newspaper-discord-bot">https://github.com/youzhe0305/newspaper-discord-bot</a><br>裡面有完整的程式碼</p>
 ]]></content>
       <categories>
-        <category>Personal-Project</category>
+        <category>Team-Project</category>
       </categories>
       <tags>
         <tag>Crawler</tag>
