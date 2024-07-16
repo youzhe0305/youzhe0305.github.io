@@ -3,12 +3,23 @@
   <entry>
     <title>LLM輔助論文檢索機器人</title>
     <url>/Team-Project/LLM-paper-search/</url>
-    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview:"></a>Overview:</h1><p>此專案製作”論文綜整與檢索的Discord Bot”。透過selenium爬蟲收集最新的論文並解析其內容。利用RAG LLM技術，以本地資料庫的形式供LLM搜索，讓LLM可以檢索出符合使用者需求敘述且足夠新的論文，最後以discord Bot的方式製作使用者介面，與使用者互動及呈現資料。</p>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作”論文綜整與檢索的Discord Bot”。透過selenium爬蟲收集最新的論文並解析其內容。利用RAG LLM技術，以本地資料庫的形式供LLM搜索，讓LLM可以檢索出符合使用者需求敘述且足夠新的論文，最後以discord Bot的方式製作使用者介面，與使用者互動及呈現資料。</p>
+<h3 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h3><ul>
+<li>Crawler<ul>
+<li>selenium   </li>
+</ul>
+</li>
+<li>LLM<ul>
+<li>LangChain</li>
+</ul>
+</li>
+<li>Discord Bot</li>
+</ul>
 <p>示意圖:<br><img src="/Team-Project/LLM-paper-search/demo.png" alt=""></p>
 <p>介紹影片:<br><div class="video-container"><iframe src="https://www.youtube.com/embed/8r9ehgZSaWo" frameborder="0" loading="lazy" allowfullscreen></iframe></div></p>
-<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation:"></a>Motivation:</h1><p>因為GPT3.5/4只有到2021/2023的資料庫，不足以供應最新的論文需求，因此製作此程式，用來提供最新論文的搜索。</p>
-<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>使用selenium製作爬蟲，把arXiv網站的2024年論文資料抓下來。目前只抓了title, abstract, link，因為如果存取全文，在搜索及資料庫建置上需要花上非常多的時間以及金錢，故只留下用來搜索的重要部分。</p>
-<h2 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h2><p>使用langchain做RAG LLM，採用GPT3.5模型，做了5種prompting enginerring，並另外做了無法搜索成功的例外處理。<br>使用者輸入任意的關鍵字、問題等，模型將自動將其轉換為搜尋論文的問題，並交由LLM模型在爬蟲得到的資料庫中搜索，回傳英文以及中文的’title, summery, tag, link’。</p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一下學期，修習”人工智慧概論”之專題<br>因為GPT3.5/4只有到2021/2023的資料庫，不足以供應最新的論文需求，因此製作此程式，用來提供最新論文的搜索。</p>
+<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>使用<strong>selenium</strong>製作爬蟲，把<strong>arXiv</strong>網站的<strong>2024</strong>年論文資料抓下來。目前只抓了title, abstract, link，因為如果存取全文，在搜索及資料庫建置上需要花上非常多的時間以及金錢，故只留下用來搜索的重要部分。</p>
+<h2 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h2><p>使用<strong>langchain</strong>做RAG LLM，採用<strong>GPT3.5</strong>模型，做了<strong>5種prompting enginerring</strong>，並另外做了無法搜索成功的例外處理。<br>使用者輸入任意的關鍵字、問題等，模型將自動將其轉換為搜尋論文的問題，並交由LLM模型在爬蟲得到的資料庫中搜索，回傳英文以及中文的’title, summery, tag, link’。</p>
 <h2 id="Discord-Bot"><a href="#Discord-Bot" class="headerlink" title="Discord Bot"></a>Discord Bot</h2><p>使用者介面，使用者可利用指令的方式，給予模型輸入，模型會以Discord Channel Message的方式做出回覆，並且有中英文翻譯的功能。</p>
 <h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p>主要採用3種評估方式: 格式正確率、內容正確率、內容相關率</p>
 <ul>
@@ -24,7 +35,7 @@
 </ul>
 <p>註: 內容正確率中，分析30次試驗發現title、summery、tag都沒有出錯，出錯的部分都是link</p>
 <h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p>我: 關於LLM的全部工作，串接LLM與爬蟲、Discord Bot<br>組員1: 製作爬蟲，爬取資料<br>組員2: 製作Disocrd Bot介面</p>
-<h1 id="Detail"><a href="#Detail" class="headerlink" title="Detail"></a>Detail</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Intro-AI-Final-Project">https://github.com/youzhe0305/Intro-AI-Final-Project</a><br>裡面有完整的程式碼(不含資料庫)，以及報告、簡報</p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Intro-AI-Final-Project">https://github.com/youzhe0305/Intro-AI-Final-Project</a><br>裡面有完整的程式碼(不含資料庫)，以及報告、簡報</p>
 ]]></content>
       <categories>
         <category>Team-Project</category>
@@ -35,6 +46,7 @@
         <tag>Crawler</tag>
         <tag>Discord Bot</tag>
         <tag>Bot</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -235,6 +247,30 @@
       </tags>
   </entry>
   <entry>
+    <title>&lt;演算法筆記&gt; ST表資料結構</title>
+    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-ST/</url>
+    <content><![CDATA[<p>ST表，Sparse-Table演算法，用來解決可重複貢獻的區間問題，也就是求大區間時，可以用兩個重疊的小區間獲得(通常就是用來解區間最大最小值，區間加值因為重疊會累加，所以不行)</p>
+<p>ST表使用了倍增的方式，先建好所有2的次方數長度的區間，然後把任意區間用兩個長度大於區間一半的子區間去構成，如圖:</p>
+<p><img src="/演算法教學/algorithm-ST/st-preprocess-lift.svg" alt=""><br>(圖取自:<a href="https://oi-wiki.org/ds/sparse-table/">OI wiki</a>)</p>
+<p>利用兩個長度4的區間，直接算出長度6的區間的最大值，而這兩個長度4的區間，會在我們ST表裡面(2的次方)。</p>
+<p>這樣的算法中，因為我們以每個點為起點，建構2的次方長度的區間，建構的複雜度為$O(NlogN)$，在查詢時，只要兩個ST表的值取極值，所以複雜度是$O(1)$，這也是他比線段樹優勢的地方，雖然差不太多就是了。</p>
+<p>實作如下:</p>
+<p>令ST表為，$ST[i][j]$，$i$代表起點，$j$代表長度為2^j次方。<br><img src="/演算法教學/algorithm-ST/ST-len-interval.png" alt=""><br>初始化讓$ST[i][0]$為$i$位置的值，然後用下列式子轉移<br>$ST[i][j] = max(ST[i][j-1],ST[i+2^{j-1}][j-1])$<br>也就是把一個$2^j$長度的區間，用兩個$2^{j-1}$長度的區間構成</p>
+<p>接著就可以開始查詢了，一個區間的數值，會是兩個區間之間去找，這兩個區間的長度要是第一個大於等於區間一半長度的2次方，並分別從頭尾延伸向中間。<br>假設最左為$l$最右為$r$，子區間長度為$2^s$，轉移式如下:<br>$ans = max(ST[l][s],ST[r-2^s+1][s])$</p>
+<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> LOGN = <span class="built_in">log2</span>(MAXN)+<span class="number">1</span>; <span class="comment">// 最大的log值</span></span><br><span class="line"><span class="type">int</span> arr[MAXN]; <span class="comment">// 儲存資料</span></span><br><span class="line"><span class="type">int</span> logn[MAXN]; <span class="comment">// 某個數字的log值向下取整，也就是大於區間一半的第一個2的次方數</span></span><br><span class="line"><span class="type">int</span> st[MAXN][LOGN]; <span class="comment">// ST表</span></span><br><span class="line"><span class="type">int</span> n,m; <span class="comment">// n:資料數量, m:詢問數量</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pre_log</span><span class="params">()</span></span>&#123; <span class="comment">// 預處理log值</span></span><br><span class="line">    logn[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    logn[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">3</span>;i&lt;=MAXN;i++)</span><br><span class="line">        logn[i] = logn[i/<span class="number">2</span>] + <span class="number">1</span>; <span class="comment">// 這個整數小於真正的log值，但不會差到1，所以可以覆蓋到一半以上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123; <span class="comment">// 初始化ST表</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        st[i][<span class="number">0</span>] = arr[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        cin&gt;&gt;arr[i];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">pre_log</span>();</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=LOGN;j++)&#123; <span class="comment">// 枚舉不同長度的區間，直到最大</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i + (<span class="number">1</span>&lt;&lt;j) - <span class="number">1</span> &lt;=n;i++) <span class="comment">// st表的儲存範圍 = (i,i+2^j - 1)(長度2^j)</span></span><br><span class="line">            st[i][j] = <span class="built_in">max</span>( st[i][j<span class="number">-1</span>], st[i + (<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))][j<span class="number">-1</span>] ); <span class="comment">// 用兩個長度2^(j-1)的區間構成</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(m--)&#123; <span class="comment">// m次</span></span><br><span class="line">        <span class="type">int</span> l,r; <span class="comment">// 區間的左右端點</span></span><br><span class="line">        cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">        <span class="type">int</span> len = r-l+<span class="number">1</span>; <span class="comment">// 區間長度</span></span><br><span class="line">        <span class="type">int</span> s = logn[len]; <span class="comment">// 涵蓋一半的2的次方數</span></span><br><span class="line">        <span class="type">int</span> ans = <span class="built_in">max</span>(st[l][s],st[ r - (<span class="number">1</span>&lt;&lt;s) +<span class="number">1</span> ][s]);</span><br><span class="line">        cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>注意: &lt;&lt;的位移符號，依然遵循由左到右計算，並沒有優先，所以要括號</p>
+<hr>
+]]></content>
+      <categories>
+        <category>演算法筆記</category>
+      </categories>
+      <tags>
+        <tag>資料結構</tag>
+        <tag>區間</tag>
+        <tag>ST表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>&lt;演算法筆記&gt; 拓樸排序演算法</title>
     <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Topological-Sorting/</url>
     <content><![CDATA[<p>拓樸排序(Topological Sorting)用於<a href="https://zh.wikipedia.org/zh-tw/%E6%9C%89%E5%90%91%E6%97%A0%E7%8E%AF%E5%9B%BE">有向無環圖(DAG)</a>上，可以排出一個節點順序，保證每個節點被經過時，前面指向他的節點都已經被經過。</p>
@@ -258,27 +294,67 @@
       </tags>
   </entry>
   <entry>
-    <title>&lt;演算法筆記&gt; ST表資料結構</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-ST/</url>
-    <content><![CDATA[<p>ST表，Sparse-Table演算法，用來解決可重複貢獻的區間問題，也就是求大區間時，可以用兩個重疊的小區間獲得(通常就是用來解區間最大最小值，區間加值因為重疊會累加，所以不行)</p>
-<p>ST表使用了倍增的方式，先建好所有2的次方數長度的區間，然後把任意區間用兩個長度大於區間一半的子區間去構成，如圖:</p>
-<p><img src="/演算法教學/algorithm-ST/st-preprocess-lift.svg" alt=""><br>(圖取自:<a href="https://oi-wiki.org/ds/sparse-table/">OI wiki</a>)</p>
-<p>利用兩個長度4的區間，直接算出長度6的區間的最大值，而這兩個長度4的區間，會在我們ST表裡面(2的次方)。</p>
-<p>這樣的算法中，因為我們以每個點為起點，建構2的次方長度的區間，建構的複雜度為$O(NlogN)$，在查詢時，只要兩個ST表的值取極值，所以複雜度是$O(1)$，這也是他比線段樹優勢的地方，雖然差不太多就是了。</p>
-<p>實作如下:</p>
-<p>令ST表為，$ST[i][j]$，$i$代表起點，$j$代表長度為2^j次方。<br><img src="/演算法教學/algorithm-ST/ST-len-interval.png" alt=""><br>初始化讓$ST[i][0]$為$i$位置的值，然後用下列式子轉移<br>$ST[i][j] = max(ST[i][j-1],ST[i+2^{j-1}][j-1])$<br>也就是把一個$2^j$長度的區間，用兩個$2^{j-1}$長度的區間構成</p>
-<p>接著就可以開始查詢了，一個區間的數值，會是兩個區間之間去找，這兩個區間的長度要是第一個大於等於區間一半長度的2次方，並分別從頭尾延伸向中間。<br>假設最左為$l$最右為$r$，子區間長度為$2^s$，轉移式如下:<br>$ans = max(ST[l][s],ST[r-2^s+1][s])$</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> LOGN = <span class="built_in">log2</span>(MAXN)+<span class="number">1</span>; <span class="comment">// 最大的log值</span></span><br><span class="line"><span class="type">int</span> arr[MAXN]; <span class="comment">// 儲存資料</span></span><br><span class="line"><span class="type">int</span> logn[MAXN]; <span class="comment">// 某個數字的log值向下取整，也就是大於區間一半的第一個2的次方數</span></span><br><span class="line"><span class="type">int</span> st[MAXN][LOGN]; <span class="comment">// ST表</span></span><br><span class="line"><span class="type">int</span> n,m; <span class="comment">// n:資料數量, m:詢問數量</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pre_log</span><span class="params">()</span></span>&#123; <span class="comment">// 預處理log值</span></span><br><span class="line">    logn[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    logn[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">3</span>;i&lt;=MAXN;i++)</span><br><span class="line">        logn[i] = logn[i/<span class="number">2</span>] + <span class="number">1</span>; <span class="comment">// 這個整數小於真正的log值，但不會差到1，所以可以覆蓋到一半以上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123; <span class="comment">// 初始化ST表</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        st[i][<span class="number">0</span>] = arr[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        cin&gt;&gt;arr[i];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">pre_log</span>();</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=LOGN;j++)&#123; <span class="comment">// 枚舉不同長度的區間，直到最大</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i + (<span class="number">1</span>&lt;&lt;j) - <span class="number">1</span> &lt;=n;i++) <span class="comment">// st表的儲存範圍 = (i,i+2^j - 1)(長度2^j)</span></span><br><span class="line">            st[i][j] = <span class="built_in">max</span>( st[i][j<span class="number">-1</span>], st[i + (<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))][j<span class="number">-1</span>] ); <span class="comment">// 用兩個長度2^(j-1)的區間構成</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(m--)&#123; <span class="comment">// m次</span></span><br><span class="line">        <span class="type">int</span> l,r; <span class="comment">// 區間的左右端點</span></span><br><span class="line">        cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">        <span class="type">int</span> len = r-l+<span class="number">1</span>; <span class="comment">// 區間長度</span></span><br><span class="line">        <span class="type">int</span> s = logn[len]; <span class="comment">// 涵蓋一半的2的次方數</span></span><br><span class="line">        <span class="type">int</span> ans = <span class="built_in">max</span>(st[l][s],st[ r - (<span class="number">1</span>&lt;&lt;s) +<span class="number">1</span> ][s]);</span><br><span class="line">        cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>注意: &lt;&lt;的位移符號，依然遵循由左到右計算，並沒有優先，所以要括號</p>
-<hr>
+    <title>新聞推播Discord Bot</title>
+    <url>/Personal-Project/newspaper-dc-bot/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作 “定時推播新聞的Discord Bot”。透過bs4爬蟲、RSS每天收集最新新聞更新資料庫，並定期在Discord頻道做新聞的推播，使用者可以自選想看的新聞種類。新聞資訊將帶有標題、連結</p>
+<h3 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h3><ul>
+<li>Crawler<ul>
+<li>bs4</li>
+</ul>
+</li>
+<li>RSS   </li>
+<li>Discord Bot</li>
+</ul>
+<p>示意圖:<br><img src="/Personal-Project/newspaper-dc-bot/newspaper-UI.png" alt=""></p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>SITCON CAMP 2021的黑客松作品，主題為Discord Bot的應用。</p>
+<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Data-Collection"><a href="#Data-Collection" class="headerlink" title="Data Collection"></a>Data Collection</h2><p>使用<strong>bs4</strong>製作爬蟲，輔以新聞的RSS系統，把<strong>7家新聞網站</strong>的最新資料抓下來。存取了種類、標題、tag等等資訊。</p>
+<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>將各家不同的種類、tag整合為特定的幾個類別，以便整合之後，供使用者選取。</p>
+<h2 id="Discord-Bot"><a href="#Discord-Bot" class="headerlink" title="Discord Bot"></a>Discord Bot</h2><p>每天定時推播，使用者可以透過emoji的選擇，讓Discord把相關種類的新聞播送出來</p>
+<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p>我: 負責爬蟲、RSS爬取新聞，並分出類別、tag，貢獻Discord Bot的部分介面<br>組員: 完成Discord Bot的介面</p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/newspaper-discord-bot">https://github.com/youzhe0305/newspaper-discord-bot</a><br>裡面有完整的程式碼</p>
 ]]></content>
       <categories>
-        <category>演算法筆記</category>
+        <category>Personal-Project</category>
       </categories>
       <tags>
-        <tag>資料結構</tag>
-        <tag>區間</tag>
-        <tag>ST表</tag>
+        <tag>Crawler</tag>
+        <tag>Discord Bot</tag>
+        <tag>Python</tag>
+        <tag>RSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++ Text-Based Dungeon Game</title>
+    <url>/Personal-Project/text-based-dungeon-game/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作 “基於文字的地下城遊戲”，在遊戲中，將隨機生成的地下城，玩家需要擊敗裡面的所有怪物及探索完所有房間以獲得勝利</p>
+<p>遊戲採用回合制戰鬥，設有裝備系統與技能系統，設計了25種裝備以及10種技能，每種技能都有自己的戰吼效果，以及不同的傷害計算、buff疊加效果</p>
+<p>在地下城中，會遇到不同的怪物，打敗怪物時，可以從怪物身上學到技能，也有菁英怪，可以學到特別強力的技能。 一路上也會遇到不同的NPC，可以與之交易，或是觸發NPC特殊劇情，學會特殊技能。</p>
+<h2 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h2><ul>
+<li>C++</li>
+<li>OOP (Object-Oriented Programming)</li>
+<li>DS (Data Structure)</li>
+</ul>
+<p>示意圖:<br><img src="/Personal-Project/text-based-dungeon-game/dungeon_room.png" alt=""><br><img src="/Personal-Project/text-based-dungeon-game/dungeon_battle.png" alt=""></p>
+<p>介紹影片:<br><div class="video-container"><iframe src="https://www.youtube.com/embed/GfCF2AjKM00" frameborder="0" loading="lazy" allowfullscreen></iframe></div></p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一下學期，修習”資料結構與物件導向程式設計”之作業，要求使用C++及物件導向方法，建構一個地下城的遊戲。</p>
+<h1 id="Feature"><a href="#Feature" class="headerlink" title="Feature"></a>Feature</h1><h2 id="Item"><a href="#Item" class="headerlink" title="Item"></a>Item</h2><p>有<strong>3類共25種的物品</strong>，分別為 藥水、食物、裝備，可以從寶箱或是NPC得到。</p>
+<h2 id="Skill"><a href="#Skill" class="headerlink" title="Skill"></a>Skill</h2><p>有<strong>10種技能</strong>，使用virtual function讓每個技能能有不同的傷害計算公式<br>每種技能都有<strong>獨特施放效果(戰吼)</strong>，並且不同技能會帶來<strong>5種不同的buff</strong>。</p>
+<h2 id="Arena"><a href="#Arena" class="headerlink" title="Arena"></a>Arena</h2><p>以回合制式呈現現，可在戰鬥中施放技能、使用物品、逃跑等等。<br>打贏怪物後，怪物會掉落經驗值，並且玩家有<strong>機率學到怪物的技能</strong></p>
+<h2 id="Room"><a href="#Room" class="headerlink" title="Room"></a>Room</h2><p>有怪物、寶箱、NPC等物件可互動。且怪物的生成隨著玩家等級，強度會改變。<br>有<strong>4種不同的房間</strong>，每種房間有對應的房間事件，在進入房間時有機會觸發，帶來不同的效果及buff, debuff。</p>
+<h2 id="NPC"><a href="#NPC" class="headerlink" title="NPC"></a>NPC</h2><p>有<strong>2種NPC</strong>：商人以及特殊NPC<br>玩家可以與商人交易，獲得裝備、藥水、食物，商人販售的物品是隨機決定，有機會從裡面買到很好的物品。<br>特殊NPC則會觸發<strong>特殊事件</strong>，有劇情，並且在劇情結束後，玩家會從特殊NPC身上學到技能。</p>
+<h2 id="Monster"><a href="#Monster" class="headerlink" title="Monster"></a>Monster</h2><p>實作了<strong>5種不同的怪物</strong>，每種怪物有不同的數值成長曲線，並且各自擁有獨特的技能。<br>其中也包含了精英怪物，擁有combo類型的技能，為地下城中的一大挑戰。</p>
+<h2 id="Player"><a href="#Player" class="headerlink" title="Player"></a>Player</h2><p>實作了 背包系統、裝備系統、等級系統，讓玩家可以如一般RPG一樣，做物品的裝備、使用，並且能透過打怪升級。</p>
+<h1 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h1><p><img src="/Personal-Project/text-based-dungeon-game/dungeon_UML.jpg" alt=""></p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Text-Based-Dungeon-Game">https://github.com/youzhe0305/Text-Based-Dungeon-Game</a><br>裡面有完整的程式碼，以及報告、簡報</p>
+]]></content>
+      <categories>
+        <category>Personal-Project</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>OOP</tag>
+        <tag>DS</tag>
+        <tag>Game</tag>
       </tags>
   </entry>
 </search>
