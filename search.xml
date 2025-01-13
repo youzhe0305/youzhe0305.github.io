@@ -1,174 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>&lt;演算法筆記&gt; BIT資料結構</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-BIT/</url>
-    <content><![CDATA[<p>BIT(Binary Indexed Tree)，樹狀數組，用來維護區間的資料結構，一般情況下，我們會用它處理單點修改區間查詢的區間加值問題，當然他也可以處理更複雜的問題，不過就要搭配差分等，其他的資料結構，這裡暫且不談。</p>
-<p>BIT的核心概念是倍增，每個區間都可以使用2的次方長度的子區間構成，所以我們只要維護2的次方長度的區間。舉例來說，7的二進制是1101，也就是他可以用1~4、5~6、7三個區間組成。</p>
-<p>我們實際需要維護的區間如下圖，以每個數字的格子作為尾端，做一個區間，區間的長度是該數字轉成二進制後，最右邊的1代表的值，像是6=110，最右邊的1是在第2位，也就是2的1次方。<br><img src="/演算法教學/algorithm-BIT/BIT.png" alt=""></p>
-<p>至於為什麼會這樣，是因為我們每前進一個數字，就會從二進制的最右端+1，這時候可能會發生進位，但不論如何進位，該數字都會在最右端的區間裡，所以取最右端的1當作區間長度，再更左的1，就用這個數字之前的區間構成。</p>
-<p>這裡我們定義x轉成二進制後，最右端的1為lowbit(x)，在數學上的計算方法中，剛好會是(x&amp;-x)的值，至於為什麼我就不知道了。</p>
-<p>BIT與線段樹的主要差別就是，他的空間只需要N，因為存的是以每個數字當尾端的區間值，所以區間值的數量剛好會跟數字一樣多，也就是N，比線段樹的4N小。另外，BIT的常數也比線段樹小一點。</p>
-<p>接下來講講BIT的具體實現方法。</p>
-<h3 id="區間查詢"><a href="#區間查詢" class="headerlink" title="區間查詢"></a>區間查詢</h3><p>如上所提到的，一個從1開始的區間可以變成二進制的底下，所有1代表的區間構成，所以我們就要一一找出對應的區間。</p>
-<p>假設我們要找1~6，該數字6會在最右邊的區間，也就是lowbit(6)，所以我們先把答案加上這個區間的值，然後數字減去這個區間的長度，以6為例，就是減掉5~6的區間長2，變成4，換成二進制就是110去掉最右邊的1，變成100，這樣4又變成了lowbit(4)的尾端了，這樣重複做下去，直到0就可以獲得1~x的區間值。</p>
-<p>當我們想要得到，l~r的區間值時，只要用前綴和的方法。1~r減去1~(l-1)，就可以了。</p>
-<p>複雜度: $O(logN)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> lowbit(x) x&amp;-x</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> bit[], <span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(x&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        ans += bit[x];</span><br><span class="line">        x -= <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<h3 id="單點修改"><a href="#單點修改" class="headerlink" title="單點修改"></a>單點修改</h3><p>單點修改想起來就比較抽象了，當我們修改其中一個點時，我們就要連帶修改所有會被影響到的區間，而這些區間，從BIT圖可以看出，就是以這個點所在的區間開始，向上找父區間(包含到該區間的區間)。</p>
-<p>從BIT圖中，可以看出，只要加上該點的區間長度，就會變成他往上一個的父區間，也就是加上lowbit(x)。往上的父區間出現變動時，一樣加上lowbit，就可以找到更上面被影響到的區間。</p>
-<p>複雜度: $O(logN)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">modify</span><span class="params">(<span class="type">int</span> bit[], <span class="type">int</span> x, <span class="type">int</span> val)</span></span>&#123; <span class="comment">// 直接用加的比較好寫</span></span><br><span class="line">    <span class="keyword">while</span>(x&lt;=n)&#123;</span><br><span class="line">        bit[x] += val;</span><br><span class="line">        x += <span class="built_in">lowbit</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="建立BIT"><a href="#建立BIT" class="headerlink" title="建立BIT"></a>建立BIT</h3><p>既然我們掌握了單點修改的方法，只要對每個點做修改，就可以做到初始的建立了，複雜度: $O(NlogN)$</p>
-<hr>
+    <title>新聞推播Discord Bot</title>
+    <url>/Team-Project/newspaper-dc-bot/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作 “定時推播新聞的Discord Bot”。透過bs4爬蟲、RSS每天收集最新新聞更新資料庫，並定期在Discord頻道做新聞的推播，使用者可以自選想看的新聞種類。新聞資訊將帶有標題、連結</p>
+<h3 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h3><ul>
+<li>Crawler<ul>
+<li>bs4</li>
+</ul>
+</li>
+<li>RSS   </li>
+<li>Discord Bot</li>
+</ul>
+<p>示意圖:<br><img src="/Team-Project/newspaper-dc-bot/newspaper-UI.png" alt=""></p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>SITCON CAMP 2021的黑客松作品，主題為Discord Bot的應用。</p>
+<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Data-Collection"><a href="#Data-Collection" class="headerlink" title="Data Collection"></a>Data Collection</h2><p>使用<strong>bs4</strong>製作爬蟲，輔以新聞的RSS系統，把<strong>7家新聞網站</strong>的最新資料抓下來。存取了種類、標題、tag等等資訊。</p>
+<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>將各家不同的種類、tag整合為特定的幾個類別，以便整合之後，供使用者選取。</p>
+<h2 id="Discord-Bot"><a href="#Discord-Bot" class="headerlink" title="Discord Bot"></a>Discord Bot</h2><p>每天定時推播，使用者可以透過emoji的選擇，讓Discord把相關種類的新聞播送出來</p>
+<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p>我: 負責爬蟲、RSS爬取新聞，並分出類別、tag，貢獻Discord Bot的部分介面<br>組員: 完成Discord Bot的介面</p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/newspaper-discord-bot">https://github.com/youzhe0305/newspaper-discord-bot</a><br>裡面有完整的程式碼</p>
 ]]></content>
       <categories>
-        <category>演算法筆記</category>
+        <category>Team-Project</category>
       </categories>
       <tags>
-        <tag>資料結構</tag>
-        <tag>區間</tag>
-        <tag>BIT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>&lt;演算法筆記&gt; Dijkstra單點源最短路演算法</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Dijkstra/</url>
-    <content><![CDATA[<p>Dijkstra演算法，戴克斯特拉演算法，用來解決單點源最短路問題的演算法。</p>
-<p>講Dijkstra之前，我們要先了解鬆弛的概念，鬆弛就是兩個點之間，出現了一條更短路徑。舉例來講，a到b的距離是10，a到c到b的距離是8，因為出現了更短的路徑，因此我們說，c鬆弛了a到b。</p>
-<p>Dijkstra的核心在於，我們在找最短路時，每次都選擇目前距離最近的點。因為其他點的距離都更遠，不可能去利用其他點來鬆弛這個點，所以這個點現在的距離保證會是他的最短距離。之後我們可以再利用這個保證是最短路徑的點，去試著鬆弛其他點。</p>
-<p><img src="/演算法教學/algorithm-Dijkstra/Dijkstra.gif" alt=""></p>
-<p>實作上，我們會利用priority_queue來達成，我們會把每個新被鬆弛出來的點，丟進去priority_queue裡面，並且把裡面最小的取出來，再用這個點去鬆弛其他點。</p>
-<p>順帶一提，Dijkstra不能用在有負環的圖上，關於這個，我們會在下一篇的SPFA演算法中提到</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><p>時間複雜度$O(NlogN)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">vector&lt; pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; &gt; gra[MAXN]; <span class="comment">// 圖</span></span><br><span class="line"><span class="type">int</span> dis[MAXN]; <span class="comment">// 記錄距離</span></span><br><span class="line"><span class="type">int</span> vis[MAXN]; <span class="comment">// 記錄是不是確定是最短路徑，並且鬆弛過別人了</span></span><br><span class="line"></span><br><span class="line">priority_queue&lt; pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; ,vector&lt; pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; &gt;,greater&lt; pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; &gt; &gt; pq;</span><br><span class="line"><span class="comment">// greater 代表由小到大</span></span><br><span class="line"><span class="comment">// 裡面的儲存格式為&#123;dis[a],a&#125;，把點權放前面是因為priority_queue會優先以first項來排序</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dijkstra</span><span class="params">(<span class="type">int</span> s)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 如果已經確定是最短路徑，後面得到的值一定不是最短的，直接丟掉換下一個</span></span><br><span class="line">    <span class="keyword">if</span>(vis[s])&#123; </span><br><span class="line">        pq.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">if</span>(!pq.<span class="built_in">empty</span>())</span><br><span class="line">        <span class="built_in">dijkstra</span>(pq.<span class="built_in">top</span>().S);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    vis[s] = <span class="number">1</span>; <span class="comment">// 被拿來鬆弛其他人</span></span><br><span class="line"></span><br><span class="line">    pq.<span class="built_in">pop</span>();</span><br><span class="line">    <span class="keyword">for</span>(pair&lt;<span class="type">int</span>,<span class="type">int</span> &gt; i:gra[s])&#123;</span><br><span class="line">        <span class="keyword">if</span>(dis[i.F]&gt;dis[s]+i.S)&#123; <span class="comment">// 鬆弛成功 // i.S表示邊權</span></span><br><span class="line">            dis[i.F] = dis[s]+i.S; <span class="comment">// 更新距離</span></span><br><span class="line">            pq.<span class="built_in">push</span>(&#123;dis[i.F],i.F&#125;); <span class="comment">// 有了更小的距離，因此丟進priority_queue中比較</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!pq.<span class="built_in">empty</span>())</span><br><span class="line">        <span class="built_in">dijkstra</span>(pq.<span class="built_in">top</span>().S); <span class="comment">// 找下一個目前最近的點是誰</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>圖論</tag>
-        <tag>最短路</tag>
-        <tag>Dijkstra</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>&lt;演算法筆記&gt; Floyd-Warshall多點源最短路演算法</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Floyd-Warshall/</url>
-    <content><![CDATA[<p>Floyd-Warshall演算法，弗洛伊德演算法，用來解決多點源最短路問題的演算法。</p>
-<p>相較於Dijkstra及SPFA只能找到對於一個起點的最短路徑，Floyd-Warshall可以用來找到圖上任意點對任意點的最短路徑。</p>
-<p>Floyd-Warshall的概念相對起來好懂很多，就是幹下去就對了，用每一個點去鬆弛每一個點。直接用for迴圈枚舉就行，就直接看code吧</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><p>時間複雜度$O(N^3)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">int</span> dp[MAXN]; <span class="comment">// 表示最短距離</span></span><br><span class="line"><span class="type">void</span> Floyd-<span class="built_in">Warshall</span>()&#123;  </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(dp[i][j] &gt; dp[i][k] + dp[k][j])&#123;</span><br><span class="line">                    dp[i][j] = dp[i][k] + dp[k][j]; <span class="comment">// 當可以被鬆弛，則更新</span></span><br><span class="line">                &#125;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>圖論</tag>
-        <tag>最短路</tag>
-        <tag>Floyd-Warshall</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>&lt;演算法筆記&gt; 並查集資料結構</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Disjoint-Set/</url>
-    <content><![CDATA[<p>並查集(Disjoint-set)，用來處理物品是否同一群的資料結構，他可以做到合併、查詢集合的功能，所以稱為並查集。</p>
-<p>我們透過紀錄每個點的父節點來達成，當兩個點被歸類到同一集合時，我們以這個集合的根最為父節點，我這裡稱為最終父節點。</p>
-<p>查詢時，如果有兩個點的最終父節點相同，即代表他們在同個集合裡。</p>
-<p>合併時，把其中一個集合的最終父節點，定為另一個集合的最終父節點，讓兩者最終父節點相同，即達成合併。</p>
-<p>另外，合併有個優化的方法，稱為啟發式合併，在啟發式合併裡，我們選擇把比較小的集合併到比較大的集合中，這樣當這個比較小的集合要更新成新的父節點時，只要走更少的路。</p>
-<p>這東西直接看code會更好懂一點。</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code"></a>示範code</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> p[MAXN]; <span class="comment">// 節點的父節點</span></span><br><span class="line"><span class="type">int</span> s[MAXN]; <span class="comment">// 集合大小(size)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123; <span class="comment">//　初始化先把自己的父節點設為自己，並把集合大小設為1</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		p[i] = i, s[i] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> v)</span></span>&#123; <span class="comment">// 查詢父節點</span></span><br><span class="line">	<span class="comment">// 看父節點是不是自己，不是就往上找父節點，直到最終父節點(父節點=自己)</span></span><br><span class="line">	<span class="keyword">return</span> p[v] == v ? v : p[v] = <span class="built_in">find</span>(p[v]); <span class="comment">// 順便把點的父節點更新成最終父節點</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">uni</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>&#123; <span class="comment">// 合併兩個集合</span></span><br><span class="line">	<span class="comment">// 讓a集合的最終父節點，變成b集合的最終父節點</span></span><br><span class="line">	<span class="comment">//  讓a集合並到b集合上</span></span><br><span class="line">	<span class="type">int</span> pa = <span class="built_in">find</span>(a), pb = <span class="built_in">find</span>(b);</span><br><span class="line">	p[pa] = pb;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">uni_inspire</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span>&#123; <span class="comment">// 啟發式合併版本</span></span><br><span class="line">	<span class="type">int</span> pa = <span class="built_in">find</span>(a), pb = <span class="built_in">find</span>(b);</span><br><span class="line">	<span class="keyword">if</span>(s[pa]&gt;s[pb]) <span class="built_in">swap</span>(pa,pb) <span class="comment">// 保持b團體更大</span></span><br><span class="line">	p[pa] = pb; <span class="comment">// 把小的a集合並到b集合上</span></span><br><span class="line">	s[pb] += s[pa]; <span class="comment">// 把size相加</span></span><br><span class="line">	s[pa] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>圖論</tag>
-        <tag>集合</tag>
-        <tag>並查集</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>&lt;演算法筆記&gt; KMP字串演算法</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-KMP/</url>
-    <content><![CDATA[<h2 id="KMP演算法"><a href="#KMP演算法" class="headerlink" title="KMP演算法"></a>KMP演算法</h2><p>KMP(Knuth–Morris–Pratt)是一個字串演算法，他可以比對一個小字串、一個大字串，看大字串中是否有出現小字串，出現了幾個，位置在哪裡</p>
-<p>ex: 找出abc在abcdabc中，出現了2次，位置分別在s[2]結尾跟s[6]結尾的地方。</p>
-<h2 id="KMP的前導，Next表"><a href="#KMP的前導，Next表" class="headerlink" title="KMP的前導，Next表"></a>KMP的前導，Next表</h2><p>在講KMP之前，我們要先來了解甚麼是Next表，Next表是一個陣列，用來儲存一個字串的前綴跟後綴，一樣的東西最長有多長。</p>
-<p>先講前綴後綴是甚麼，以abcdefg來講，從a開頭往後延伸的，a, ab, abc…都算是前綴，以g結尾，往前延伸的，g, fg, efg…都算是後綴。</p>
-<p>Next表存的就是，到第i個字為止，在他的前後綴的同樣配對中(不包括整個字串做為前綴or後綴)，最長的有多長，以abcdabc舉例:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">abcab</span><br><span class="line">00012 // next表</span><br><span class="line">i=1 no</span><br><span class="line">i=2 no</span><br><span class="line">i=3 no</span><br><span class="line">i=4 <span class="string">&#x27;a&#x27;</span>bc<span class="string">&#x27;a&#x27;</span>有長度為1</span><br><span class="line">i=5 <span class="string">&#x27;ab&#x27;</span>c<span class="string">&#x27;ab&#x27;</span>有長度為2</span><br><span class="line">當然，也可以有前後綴重疊的時候</span><br><span class="line">ababa在i=5的時候，就有<span class="string">&#x27;aba&#x27;</span>ba跟ab<span class="string">&#x27;aba&#x27;</span>，長度為3</span><br></pre></td></tr></table></figure>
-<p>至於要怎麼找，讓我們從最暴力的方式慢慢優化它。</p>
-<h3 id="暴力解"><a href="#暴力解" class="headerlink" title="暴力解:"></a>暴力解:</h3><p>直接一一比對，每個i都做一次，然後從最長的可能狀況枚舉next的長度，如果不成立就-1，一直枚舉到成立或是0，就是最長的的狀況了</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> next[<span class="number">100</span>];</span><br><span class="line">next[<span class="number">0</span>] = <span class="number">0</span>; <span class="comment">// 第一個數一定會是0</span></span><br><span class="line"><span class="type">int</span> len = str.<span class="built_in">length</span>();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++) <span class="comment">// 從第2個數開始</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> j = i; j &gt;= <span class="number">0</span>; j--)&#123; <span class="comment">// 枚舉長度，總長為i+1，所以最長是i</span></span><br><span class="line"><span class="comment">// substr用來找子字串，參數(開始的位置，子字串長度)</span></span><br><span class="line">  <span class="keyword">if</span> (str.<span class="built_in">substr</span>(<span class="number">0</span>, j) == str.<span class="built_in">substr</span>(i - j + <span class="number">1</span>, j)) &#123; <span class="comment">// 比對是否一樣</span></span><br><span class="line">    next[i] = j;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>複雜度為$O(N^3)$，枚舉子字串(i)長度$O(N)$，枚舉next長度$O(N)$，比對字串複雜度$O(N)$</p>
-<h2 id="優化1"><a href="#優化1" class="headerlink" title="優化1"></a>優化1</h2><p>在枚舉子字串的過程中，每次都只會比上一次多了一個字元，next最多就是+1，因此我們在枚舉長度的時候，不用每次都從最長枚舉，只要從上一個子字串(i-1)的next值+1做為最長的可能長度就行了。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> next[<span class="number">100</span>];</span><br><span class="line">next[<span class="number">0</span>] = <span class="number">0</span>; </span><br><span class="line"><span class="type">int</span> len = str.<span class="built_in">length</span>();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++) </span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> j = next[i<span class="number">-1</span>]+<span class="number">1</span>; j &gt;= <span class="number">0</span>; j--)&#123; <span class="comment">// 最長只要枚舉上一個子字串next值+1</span></span><br><span class="line">  <span class="keyword">if</span> (str.<span class="built_in">substr</span>(<span class="number">0</span>, j) == str.<span class="built_in">substr</span>(i - j + <span class="number">1</span>, j)) &#123; <span class="comment">// </span></span><br><span class="line">    next[i] = j;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>複雜度為$O(N^2)$，枚舉子字串(i)長度$O(N)$，比對時最糟情況是慢慢累加x次之後，一次跳到0，該次就得讓j從x跑到0，總體來講，會有$O(N/2)的複雜度$</p>
-<h2 id="優化2-KMP用到的最終優化"><a href="#優化2-KMP用到的最終優化" class="headerlink" title="優化2(KMP用到的最終優化)"></a>優化2(KMP用到的最終優化)</h2><p>建立在第一個優化之上，我們可以發現，當多加上一個字元時，next不是+1(str[i]!=str[ next[i-1] ])，匹配沒有成功，其實我們不需要用-1,-1,-1…的方式縮減next的長度。</p>
-<p>以axacaxax為例，當i=7，準備加入a時，這時前一個的next是3(‘axa’c’axa’)，所以最長next設為4，發現c跟x不匹配。這時候我們會想試試看next=3，不過這是沒有必要的。</p>
-<p>因為i=6時的前綴跟後綴長的一樣，都是’axa’，所以不可能選擇next為3的，因為這代表要從後綴取後面2個’xa’(第3個是要加入的a)，從前綴取前面2個’ax’，光是在這裡就不匹配了。</p>
-<p>可以看出要找到下一個可能可以用的長度有個關鍵，因為前綴跟後綴的字串一樣，是前一個next取得的子字串，所以可以視為一個單一字串str2。”str2中，必須有前綴跟後綴相同的情況，才有可能去嘗試匹配”</p>
-<p>以這題來說，’axa’相同的前後綴是’a’x’a’，所以帶有新的a的next，只有可能前面a或是更短，不會是ax。而i=7的next值也的確是2(‘ax’acax’ax’)</p>
-<p>總結來講，當我們要做縮減時，我們應該找到那個上一個子字串中，next字串的next字串，並嘗試，失敗就繼續找，直到值為0</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> next[<span class="number">100</span>];</span><br><span class="line">next[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">string str;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> len = str.<span class="built_in">length</span>();</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;len;i++)&#123; </span><br><span class="line">    <span class="type">int</span> prenext = next[i<span class="number">-1</span>]; <span class="comment">// 前一位的最長next</span></span><br><span class="line">    <span class="keyword">if</span>(str[i]==str[prenext])&#123; </span><br><span class="line">        next[i] = prenext+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(str[i]!=str[prenext])&#123; <span class="comment">// 如果不是，則開始找next字串的next長度</span></span><br><span class="line">            prenext = next[prenext<span class="number">-1</span>]; <span class="comment">// next字串的右端點到prenext-1。帶進next陣列的索引就可以得到這個next字串的next值</span></span><br><span class="line">            <span class="keyword">if</span>(prenext==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(prenext==<span class="number">0</span>)&#123; <span class="comment">// 找不到的情況有兩種，字串尾端可以跟頭匹配，或是不行</span></span><br><span class="line">            <span class="keyword">if</span>(str[i]==str[<span class="number">0</span>]) next[i] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> next[i] = <span class="number">0</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span>&#123; <span class="comment">// 匹配成功的話，值會是該長度+1(長度為新next字串的前面長度，再加上新加入的字元)</span></span><br><span class="line">            next[i] = prenext+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>複雜度是$O(N)$，枚舉子字串(i)長度$O(N)$，找next的複雜度$O(2)$(我不會證明)</p>
-<h2 id="用Next表來做KMP"><a href="#用Next表來做KMP" class="headerlink" title="用Next表來做KMP"></a>用Next表來做KMP</h2><p>知道Next表之後，我們只要把小字串s1跟大字串s2拼在一起，變成s1+’#’+s2就行了。中間的’#’是用來分隔兩個字串的。</p>
-<p>透過這個方式，只要在Next表中，看到數值=小字串長度l，就代表這個地方出現了小字串(前綴的l個就是小字串)，並且這個點是出現的小字串結尾。</p>
-<p>由此便可以獲悉: 是否出現、數量、位置</p>
-<p>模板題: <a href="https://www.luogu.com.cn/problem/P3375">P3375 【模板】KMP 字符串匹配</a></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">2e6</span>+<span class="number">5</span>;</span><br><span class="line"><span class="type">int</span> nexttable[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">next_build</span><span class="params">(string str)</span></span>&#123; <span class="comment">// 建立next表</span></span><br><span class="line"></span><br><span class="line">    nexttable[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> len = str.<span class="built_in">length</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="type">int</span> prenext = nexttable[i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">while</span>(str[i]!=str[prenext])&#123;</span><br><span class="line">            prenext = nexttable[prenext<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">if</span>(prenext==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        nexttable[i] = prenext;</span><br><span class="line">        <span class="keyword">if</span>(str[i]==str[prenext])</span><br><span class="line">            nexttable[i]++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">string str1,str2;</span><br><span class="line">cin&gt;&gt;str1;</span><br><span class="line">cin&gt;&gt;str2;</span><br><span class="line"></span><br><span class="line">string str = str2 + <span class="string">&quot;#&quot;</span> + str1; <span class="comment">// 把兩個字串結合起來，就可以套用next表了</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">next_build</span>(str); </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=str2.<span class="built_in">length</span>()+<span class="number">1</span>;i&lt;str.<span class="built_in">length</span>();i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(nexttable[i]==str2.<span class="built_in">length</span>()) cout&lt;&lt; i - <span class="number">2</span>*str2.<span class="built_in">length</span>() + <span class="number">1</span>&lt;&lt;endl; \</span><br><span class="line">    <span class="comment">// 當next表做完之後，找有沒有包含前綴長度str2.length的，有就代表這個字串完整的出現在了以i為右界的後綴(str1)</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;str2.<span class="built_in">length</span>();i++)</span><br><span class="line">    cout&lt;&lt;nexttable[i]&lt;&lt;<span class="string">&quot; &quot;</span>; <span class="comment">// 就照題目輸出str2的next表</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>參考資料:<a href="https://oi-wiki.org/string/kmp/">OI Wiki</a></p>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>字串</tag>
-        <tag>Next表</tag>
-        <tag>KMP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>&lt;演算法筆記&gt; Prim最小生成樹演算法</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Prim/</url>
-    <content><![CDATA[<h1 id="臨時打字用"><a href="#臨時打字用" class="headerlink" title="臨時打字用"></a>臨時打字用</h1><p>Prim，普林演算法，用類似Dijkstra的方式，找出一張圖裡面，能連到所有邊的樹中，權值最小的，也就是<a href="https://zh.wikipedia.org/zh-tw/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91">最小生成樹(MST)</a></p>
-<p><img src="/演算法教學/algorithm-Prim/MST.PNG" alt=""></p>
-<p>首先，類似於Dijkstra的作法，先從圖中挑一個點，把邊都丟進priority_queue中，找出目前的最小邊。</p>
-<p>因為我們保證每個點都會被用到所以要連接到一個點，可以從其他任意點過來，也就是可以挑這個點的任意邊。那自然我們會挑最小的那條邊。</p>
-<p>接著我們看這個邊連到誰，把邊丟進priority_queue裡面，繼續挑最小的往下做。如果遇到挑最小邊可能成環的狀況，就不要挑這條邊。</p>
-<p>因為挑了意味著必須把另一條相對的邊去掉，但是其他會成環的邊，一定是在最小生成樹內，也就是priority_queue篩選出來比這個邊更小的邊，才會形成環，所以這個替換必然會造成權值更大，所以不挑。</p>
-<p>ex:<br><img src="/演算法教學/algorithm-Prim/Prim.PNG" alt=""><br>當我們在挑下一條邊時，最小邊是3，但是他會連回到A點形成環。如果要把這個3的最小邊接起來，勢必要去掉1或2這兩條邊，那這個替換顯然不好，所以我們改挑下一條長度4的邊</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><p>(以上圖作為範例輸入輸出)<br>時間複雜度$O(NlogN)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pii pair<span class="string">&lt;int,int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> F first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line">vector&lt;pii&gt; vec[MAXN];</span><br><span class="line"><span class="type">int</span> vis[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Prim</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt;&gt; pq; <span class="comment">// 用來排列目前最小邊</span></span><br><span class="line">	pq.<span class="built_in">push</span>(<span class="number">0</span>,<span class="number">1</span>) <span class="comment">// 放入一個點當源點</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(!pq.<span class="built_in">empty</span>())&#123;</span><br><span class="line"></span><br><span class="line">		pii u = pq.<span class="built_in">top</span>();</span><br><span class="line">		pq.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="keyword">if</span>(vis[u.S]) <span class="keyword">continue</span>; <span class="comment">//這個點已經被挑過</span></span><br><span class="line">		vis[u.S] = <span class="number">1</span>;</span><br><span class="line">		ans += u.F <span class="comment">// 加入權值</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>(pii i:vec[u])&#123;</span><br><span class="line">			<span class="type">int</span> point = i.F, w = i.S;</span><br><span class="line">			pq.<span class="built_in">push</span>(&#123;w,point&#125;) <span class="comment">// 權值放前面，來能用來排序</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">	<span class="type">int</span> a,b,w;</span><br><span class="line">	cin&gt;&gt;a&gt;&gt;b,w;</span><br><span class="line">	vec[a].<span class="built_in">push_back</span>(&#123;b,w&#125;);</span><br><span class="line">	vec[b].<span class="built_in">push_back</span>(&#123;a,w&#125;); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cout&lt;&lt;<span class="built_in">Prim</span>()&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">input:</span><br><span class="line">5 6</span><br><span class="line">1 3 5</span><br><span class="line">1 4 1</span><br><span class="line">2 4 7122</span><br><span class="line">2 5 2</span><br><span class="line">3 5 5</span><br><span class="line">4 5 5</span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">output:</span><br><span class="line">13</span><br></pre></td></tr></table></figure></p>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>圖論</tag>
-        <tag>最小生成樹</tag>
-        <tag>Prim</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>&lt;演算法筆記&gt; Kruskal最小生成樹演算法</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Kruskal/</url>
-    <content><![CDATA[<p>Kruskal，克魯斯克爾演算法，用貪心的方式，找出一張圖裡面，能連到所有邊的樹中，權值最小的，也就是<a href="https://zh.wikipedia.org/zh-tw/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91">最小生成樹(MST)</a></p>
-<p><img src="/演算法教學/algorithm-Kruskal/MST.PNG" alt=""></p>
-<p>首先，將所有邊排序一遍，依次把最小的邊與其連到的點加入最小生成樹的子圖中，等到所有點都被加入後，就能得到最小生成樹。要注意的是，在加入邊時，要避免子圖中出現環，不然就不會是樹了。</p>
-<p>實作上，我們會利用並查集來檢查點是否已經在最小生成樹裡面，以及是否成環。</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><p>(以上圖作為範例輸入輸出)<br>時間複雜度$O(MlogM)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pip pair<span class="string">&lt;int,pair&lt;int,int&gt;</span>&gt;</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> F first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line">vector&lt;pip&gt; vec; <span class="comment">// 儲存邊</span></span><br><span class="line"><span class="type">int</span> p[MAXN]; <span class="comment">// 父節點</span></span><br><span class="line"><span class="type">int</span> s[MAXN]; <span class="comment">// 集合大小</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		p[i] = i, s[i] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> p[v] == v ? v : p[v] = <span class="built_in">find</span>(p[v]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">uni</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> pa = <span class="built_in">find</span>(a), pb = <span class="built_in">find</span>(b);</span><br><span class="line">	p[pa] = pb;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">kruskal</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(),vec.<span class="built_in">end</span>());</span><br><span class="line">	<span class="keyword">for</span>(pip i:vec)&#123;</span><br><span class="line">		<span class="type">int</span> a = i.S.F, b = i.S.S;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">find</span>(a)==<span class="built_in">find</span>(b)) <span class="keyword">continue</span>;<span class="comment">// 在同個集合下，也就是成環，試著加入重複點</span></span><br><span class="line">		<span class="built_in">uni</span>(a,b);</span><br><span class="line">		ans += i.F; <span class="comment">// 確定加入最小生成樹後，把權重加入答案</span></span><br><span class="line">	<span class="comment">// 當所有邊都跑完，就可以確定所有點都都被加進去</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line"><span class="built_in">init</span>();</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">	<span class="type">int</span> a,b,w;</span><br><span class="line">	cin&gt;&gt;a&gt;&gt;b&gt;&gt;w;</span><br><span class="line">	vec.<span class="built_in">push_back</span>(&#123; w, <span class="built_in">make_pair</span>(a, b) &#125;); <span class="comment">// 加入邊(權重放第一位，才能排序)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cout&lt;&lt;<span class="built_in">kruskal</span>()&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">input:</span><br><span class="line">5 6</span><br><span class="line">1 3 5</span><br><span class="line">1 4 1</span><br><span class="line">2 4 7122</span><br><span class="line">2 5 2</span><br><span class="line">3 5 5</span><br><span class="line">4 5 5</span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">output:</span><br><span class="line">13</span><br></pre></td></tr></table></figure></p>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>圖論</tag>
-        <tag>最小生成樹</tag>
-        <tag>Kruskal</tag>
+        <tag>Python</tag>
+        <tag>Discord Bot</tag>
+        <tag>Crawler</tag>
+        <tag>RSS</tag>
       </tags>
   </entry>
   <entry>
@@ -212,115 +71,73 @@
         <category>Team-Project</category>
       </categories>
       <tags>
+        <tag>Python</tag>
+        <tag>Discord Bot</tag>
+        <tag>Crawler</tag>
         <tag>LLM</tag>
         <tag>RAG</tag>
-        <tag>Crawler</tag>
-        <tag>Discord Bot</tag>
         <tag>Bot</tag>
-        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
-    <title>&lt;演算法筆記&gt; SPFA單點源最短路演算法</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-SPFA/</url>
-    <content><![CDATA[<p>SPFA(Shortest Path Faster Algorithm)，最短路徑快速算法，帶有queue優化的Bellman-Ford算法。(因為SPFA比較常用，就直接講SPFA，Bellman-Ford就請有興趣的人去再去研究)</p>
-<p>這個演算法通常用來解決圖上可能有負環的情況，也就是我們上一篇提到，Dijkstra演算法無法解決的狀況。讓我們先來看看，有負環的情況下，會發生甚麼事?</p>
-<p><img src="/演算法教學/algorithm-SPFA/negative-loop.gif" alt=""></p>
-<p>可以發現他會進入一個無限迴圈，一直在負環裡面跑，讓負環上的點的距離值不斷被更新、變小。</p>
-<p>也就是說，存在負環的狀況下，我們不可能找到最短路徑，因為路徑會不斷變短。所以我們要使用SPFA來解決這個問題，判斷負環是否存在。</p>
-<p>判斷負環是否存在的關鍵，在於更新次數。首先讓我們想想一個點最多被更新幾次?顯然是n-1次，因為只能被其他點各鬆弛一次，當一直被重複更新時，更新次數就會超過n-1，也就是出現了負環，SPFA也就是針對此判斷。</p>
-<p>SPFA與Bellman-Ford差別最大的是在於queue的優化，Bellman-Ford會直接不管三七二十一的，直接跑n-1次。這裡則利用類似BFS的方式來做優化，讓他不用跑滿n-1次。</p>
-<p>SPFA很像BFS，就是從起點開始，一直往下跑，看下面的點能不能被當前的點更新到，最大的差別是，SPFA是可以往回跑到重複的點的，也就是可以在後面更新出更短的路徑時，跑回去更新前面的點，就因此解決了BFS只能解決邊權唯一圖形的狀況。</p>
-<p>跑的過程中，如果可以更新，就記錄更新次數加一，如果更新次數超過了n-1，代表重複更新，有負環存在。如果沒有超過的話，更新完的值也是更新到不能再更新了。</p>
-<p>其中，我們在queue的使用上，會用inque來記錄這個點是否在queue裡面，如果一個點已經在queue裡面，代表他即將被用來更新其他點，這時候就算被更新一個新的距離，也不必再把他丟進去一次，只要把distance陣列中的值改掉，在更新的時候就會使用最小的值。</p>
-<p>ex: 有a-&gt;c,距離10的路，b-&gt;c距離5的路，假設dis[a]=3,dis[b]=5，dis[c]先被更新成dis[a]+10=13丟進queue裡面，接著dis[c]又被更新成dis[b]+5=10，這時候就不用再丟進queue一次，因為從queue拿出來的時候，會以當下的dis[c]來鬆弛其他點，也就是dis[c]=10。</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><p>時間複雜度$O(NM)$<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">int</span> dis[MAXN]; <span class="comment">// 距離</span></span><br><span class="line">queue&lt;<span class="type">int</span>&gt; que; </span><br><span class="line"><span class="type">int</span> inque[MAXN]; <span class="comment">// 記錄這個點是不是在queue裡面</span></span><br><span class="line"><span class="type">int</span> num[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">SPFA</span><span class="params">(<span class="type">int</span> v,<span class="type">int</span> n)</span></span>&#123; <span class="comment">// 以v當作起點，有n個點</span></span><br><span class="line">	dis[v] = <span class="number">0</span>;</span><br><span class="line">	que.<span class="built_in">push</span>(v);</span><br><span class="line">	inque[v] = <span class="number">1</span>; <span class="comment">// 點v進入queue</span></span><br><span class="line">	<span class="keyword">while</span>(!que.<span class="built_in">empty</span>())&#123;</span><br><span class="line"></span><br><span class="line">		<span class="type">int</span> u = que.<span class="built_in">front</span>();</span><br><span class="line">		que.<span class="built_in">pop</span>();</span><br><span class="line">		inque[u] = <span class="number">0</span>; <span class="comment">// 點v離開queue</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>(pii i:vec[u])&#123;</span><br><span class="line">			<span class="keyword">if</span>(dis[i.F] &gt; dis[u]+i.S)&#123; <span class="comment">// i.S 表示邊權</span></span><br><span class="line">				num[i.F]++;</span><br><span class="line">				<span class="keyword">if</span>(num[i.F] &gt; n<span class="number">-1</span>)&#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 如果更新次數大於n-1，代表重複更新，有負環存在</span></span><br><span class="line">				&#125;</span><br><span class="line">				dis[i.F] = dis[u]+i.S;</span><br><span class="line">				<span class="keyword">if</span>(inque[i.F]==<span class="number">0</span>)&#123;</span><br><span class="line">					que.<span class="built_in">push</span>(i.F);</span><br><span class="line">					inque[i.F]=<span class="number">1</span>;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>圖論</tag>
-        <tag>最短路</tag>
-        <tag>SPFA</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>&lt;演算法筆記&gt; ST表資料結構</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-ST/</url>
-    <content><![CDATA[<p>ST表，Sparse-Table演算法，用來解決可重複貢獻的區間問題，也就是求大區間時，可以用兩個重疊的小區間獲得(通常就是用來解區間最大最小值，區間加值因為重疊會累加，所以不行)</p>
-<p>ST表使用了倍增的方式，先建好所有2的次方數長度的區間，然後把任意區間用兩個長度大於區間一半的子區間去構成，如圖:</p>
-<p><img src="/演算法教學/algorithm-ST/st-preprocess-lift.svg" alt=""><br>(圖取自:<a href="https://oi-wiki.org/ds/sparse-table/">OI wiki</a>)</p>
-<p>利用兩個長度4的區間，直接算出長度6的區間的最大值，而這兩個長度4的區間，會在我們ST表裡面(2的次方)。</p>
-<p>這樣的算法中，因為我們以每個點為起點，建構2的次方長度的區間，建構的複雜度為$O(NlogN)$，在查詢時，只要兩個ST表的值取極值，所以複雜度是$O(1)$，這也是他比線段樹優勢的地方，雖然差不太多就是了。</p>
-<p>實作如下:</p>
-<p>令ST表為，$ST[i][j]$，$i$代表起點，$j$代表長度為2^j次方。<br><img src="/演算法教學/algorithm-ST/ST-len-interval.png" alt=""><br>初始化讓$ST[i][0]$為$i$位置的值，然後用下列式子轉移<br>$ST[i][j] = max(ST[i][j-1],ST[i+2^{j-1}][j-1])$<br>也就是把一個$2^j$長度的區間，用兩個$2^{j-1}$長度的區間構成</p>
-<p>接著就可以開始查詢了，一個區間的數值，會是兩個區間之間去找，這兩個區間的長度要是第一個大於等於區間一半長度的2次方，並分別從頭尾延伸向中間。<br>假設最左為$l$最右為$r$，子區間長度為$2^s$，轉移式如下:<br>$ans = max(ST[l][s],ST[r-2^s+1][s])$</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> LOGN = <span class="built_in">log2</span>(MAXN)+<span class="number">1</span>; <span class="comment">// 最大的log值</span></span><br><span class="line"><span class="type">int</span> arr[MAXN]; <span class="comment">// 儲存資料</span></span><br><span class="line"><span class="type">int</span> logn[MAXN]; <span class="comment">// 某個數字的log值向下取整，也就是大於區間一半的第一個2的次方數</span></span><br><span class="line"><span class="type">int</span> st[MAXN][LOGN]; <span class="comment">// ST表</span></span><br><span class="line"><span class="type">int</span> n,m; <span class="comment">// n:資料數量, m:詢問數量</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pre_log</span><span class="params">()</span></span>&#123; <span class="comment">// 預處理log值</span></span><br><span class="line">    logn[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    logn[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">3</span>;i&lt;=MAXN;i++)</span><br><span class="line">        logn[i] = logn[i/<span class="number">2</span>] + <span class="number">1</span>; <span class="comment">// 這個整數小於真正的log值，但不會差到1，所以可以覆蓋到一半以上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123; <span class="comment">// 初始化ST表</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        st[i][<span class="number">0</span>] = arr[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        cin&gt;&gt;arr[i];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">pre_log</span>();</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=LOGN;j++)&#123; <span class="comment">// 枚舉不同長度的區間，直到最大</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i + (<span class="number">1</span>&lt;&lt;j) - <span class="number">1</span> &lt;=n;i++) <span class="comment">// st表的儲存範圍 = (i,i+2^j - 1)(長度2^j)</span></span><br><span class="line">            st[i][j] = <span class="built_in">max</span>( st[i][j<span class="number">-1</span>], st[i + (<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))][j<span class="number">-1</span>] ); <span class="comment">// 用兩個長度2^(j-1)的區間構成</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(m--)&#123; <span class="comment">// m次</span></span><br><span class="line">        <span class="type">int</span> l,r; <span class="comment">// 區間的左右端點</span></span><br><span class="line">        cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">        <span class="type">int</span> len = r-l+<span class="number">1</span>; <span class="comment">// 區間長度</span></span><br><span class="line">        <span class="type">int</span> s = logn[len]; <span class="comment">// 涵蓋一半的2的次方數</span></span><br><span class="line">        <span class="type">int</span> ans = <span class="built_in">max</span>(st[l][s],st[ r - (<span class="number">1</span>&lt;&lt;s) +<span class="number">1</span> ][s]);</span><br><span class="line">        cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>注意: &lt;&lt;的位移符號，依然遵循由左到右計算，並沒有優先，所以要括號</p>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>資料結構</tag>
-        <tag>區間</tag>
-        <tag>ST表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>&lt;演算法筆記&gt; 拓樸排序演算法</title>
-    <url>/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98/algorithm-Topological-Sorting/</url>
-    <content><![CDATA[<p>拓樸排序(Topological Sorting)用於<a href="https://zh.wikipedia.org/zh-tw/%E6%9C%89%E5%90%91%E6%97%A0%E7%8E%AF%E5%9B%BE">有向無環圖(DAG)</a>上，可以排出一個節點順序，保證每個節點被經過時，前面指向他的節點都已經被經過。</p>
-<p>可以用於任務有前置條件時，對任務的排序，或是最長路徑的計算。</p>
-<p>示例圖:<br>(黑字:點編號, 紅字:執行順序)</p>
-<p><img src="/演算法教學/algorithm-Topological-Sorting/task_sort.PNG" alt=""></p>
-<p>拓樸排序的核心在於，不斷找出入度為0的點，也就是沒有任何前置任務，可以直接執行的任務。</p>
-<p>一開始，我們先找到初始入度為0的點，並把他加入我們的工作執行序列裡。接著，當我們從工作執行序列裡，將其取出並執行完成後，把它指向的節點，入度全部減一，代表前置任務被完成了一項。如果這些節點有入度成為0的點，代表他也可以直接執行，所以加入工作執行序列中，就這樣一路做到底，就完成了拓樸排序了。</p>
-<h2 id="示範code"><a href="#示範code" class="headerlink" title="示範code:"></a>示範code:</h2><p>時間複雜度$O(N)$<br>(以上圖為例)<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> rd[MAXN]; <span class="comment">// 入度</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec[MAXN]; <span class="comment">// 存圖</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">do_func</span><span class="params">(<span class="type">int</span> x)</span></span>&#123; <span class="comment">// 執行函式</span></span><br><span class="line">	cout&lt;&lt;x&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">topo</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	queue&lt;<span class="type">int</span>&gt; que; <span class="comment">// 工作序列</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="keyword">if</span>(rd[i]==<span class="number">0</span>) que.<span class="built_in">push</span>(i);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(!que.<span class="built_in">empty</span>())&#123;</span><br><span class="line">		<span class="type">int</span> u = que.<span class="built_in">front</span>();</span><br><span class="line">		que.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="built_in">do_func</span>(u); <span class="comment">// 執行這個任務</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i:vec[u])&#123;</span><br><span class="line">			rd[i]--; <span class="comment">// 因為前一個任務被執行完，所以入度減一</span></span><br><span class="line">			<span class="keyword">if</span>(rd[i]==<span class="number">0</span>) que.<span class="built_in">push</span>(i); <span class="comment">// 沒有前置序列，加入最長路</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m; <span class="comment">// 點數,邊數</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="type">int</span> a,b;</span><br><span class="line">		cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">		vec[a].<span class="built_in">push_back</span>(b);</span><br><span class="line">		rd[b]++; <span class="comment">// 被指向，所以b的入度+1</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">topo</span>();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">input:</span><br><span class="line">5 5</span><br><span class="line">1 2</span><br><span class="line">1 3</span><br><span class="line">2 4</span><br><span class="line">3 5</span><br><span class="line">4 5</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">output:</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
-<hr>
-]]></content>
-      <categories>
-        <category>演算法筆記</category>
-      </categories>
-      <tags>
-        <tag>圖論</tag>
-        <tag>DAG</tag>
-        <tag>拓樸排序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>新聞推播Discord Bot</title>
-    <url>/Team-Project/newspaper-dc-bot/</url>
-    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作 “定時推播新聞的Discord Bot”。透過bs4爬蟲、RSS每天收集最新新聞更新資料庫，並定期在Discord頻道做新聞的推播，使用者可以自選想看的新聞種類。新聞資訊將帶有標題、連結</p>
-<h3 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h3><ul>
-<li>Crawler<ul>
-<li>bs4</li>
+    <title>深度學習與實驗(6項project)</title>
+    <url>/Personal-Project/DLP/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案為深度學習課程(DLP)作業，包含以下6個主題及技術</p>
+<ol>
+<li><strong>Handcraft Neural Network</strong><ul>
+<li>Backpropagation、Neural Network、numpy</li>
 </ul>
 </li>
-<li>RSS   </li>
-<li>Discord Bot</li>
+<li><strong>Iamge Classification</strong><ul>
+<li>CNN、SCCNet</li>
 </ul>
-<p>示意圖:<br><img src="/Team-Project/newspaper-dc-bot/newspaper-UI.png" alt=""></p>
-<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>SITCON CAMP 2021的黑客松作品，主題為Discord Bot的應用。</p>
-<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Data-Collection"><a href="#Data-Collection" class="headerlink" title="Data Collection"></a>Data Collection</h2><p>使用<strong>bs4</strong>製作爬蟲，輔以新聞的RSS系統，把<strong>7家新聞網站</strong>的最新資料抓下來。存取了種類、標題、tag等等資訊。</p>
-<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>將各家不同的種類、tag整合為特定的幾個類別，以便整合之後，供使用者選取。</p>
-<h2 id="Discord-Bot"><a href="#Discord-Bot" class="headerlink" title="Discord Bot"></a>Discord Bot</h2><p>每天定時推播，使用者可以透過emoji的選擇，讓Discord把相關種類的新聞播送出來</p>
-<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p>我: 負責爬蟲、RSS爬取新聞，並分出類別、tag，貢獻Discord Bot的部分介面<br>組員: 完成Discord Bot的介面</p>
-<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/newspaper-discord-bot">https://github.com/youzhe0305/newspaper-discord-bot</a><br>裡面有完整的程式碼</p>
+</li>
+<li><strong>Image Segmentation</strong><ul>
+<li>UNet、ResNet</li>
+</ul>
+</li>
+<li><strong>Conditional Video Generation</strong><ul>
+<li>VAE、Video Generation</li>
+</ul>
+</li>
+<li><strong>Image Inpainting</strong><ul>
+<li>Transformer、MaskGIT</li>
+</ul>
+</li>
+<li><strong>Conditional Image Generation</strong><ul>
+<li>Diffusion</li>
+</ul>
+</li>
+</ol>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一暑假，修習”深度學習(DLP)”之作業</p>
+<h1 id="LAB"><a href="#LAB" class="headerlink" title="LAB"></a>LAB</h1><h2 id="Handcraft-Neural-Network"><a href="#Handcraft-Neural-Network" class="headerlink" title="Handcraft Neural Network"></a>Handcraft Neural Network</h2><p>在不使用Pytorch、Tensorflow等深度學習套件的情況下，使用Numpy刻出一個神經網路。神經網路的架構圖如下:<br><img src="/Personal-Project/DLP/NN.png" alt="Neural Network"><br>實作基於矩陣的backpropagation，實作梯度的傳播，優化參數，進行資料點的分類<br>結果如下:<br><img src="/Personal-Project/DLP/NN_pred.png" alt="Data Point Prediction"></p>
+<h2 id="Iamge-Classification"><a href="#Iamge-Classification" class="headerlink" title="Iamge Classification"></a>Iamge Classification</h2><p>構造CNN，用來做基於腦電圖(EEG)的患者動作分類，使用Spatial Component-wise Convolutional Network(SCCNet)，網路架構圖如下:<br><img src="/Personal-Project/DLP/SCCNet.png" alt="SCCNet"><br>使用Pytorch實作，並且對於一般訓練及Fine-Tune等方式做分析</p>
+<p>reference paper: <a href="https://www.merl.com/publications/docs/TR2018-210.pdf">SCCNet</a></p>
+<h2 id="Image-Segmentation"><a href="#Image-Segmentation" class="headerlink" title="Image Segmentation"></a>Image Segmentation</h2><p>只使用Pytorch來構造UNet以及ResNet34-Unet，用來做寵物圖片的前後景image segmentataion，如圖:<br><img src="/Personal-Project/DLP/Image_segmentation.png" alt="Image_segmentation"><br>建構的網路架構如下:<br>UNet:<br><img src="/Personal-Project/DLP/Unet.png" alt="Unet"><br>Res34-UNet (以ResNet做Encoder，UNet做Decoder):<br><img src="/Personal-Project/DLP/Res34_UNet.png" alt="Res34-UNet"><br>另外也實作不同的Data Augmentation(包括UNet論文中使用的Elastic Transformation等等)</p>
+<p>reference paper: <a href="https://arxiv.org/abs/1505.04597v1">UNet</a>、<a href="https://www.researchgate.net/publication/359463249_Deep_learning-based_pelvic_levator_hiatus_segmentation_from_ultrasound_images">Res34-Unet</a></p>
+<h2 id="Conditional-Video-Generation"><a href="#Conditional-Video-Generation" class="headerlink" title="Conditional Video Generation"></a>Conditional Video Generation</h2><p>建構Conditional Varitional AutoEncoder (CVAE)模型，用來做圖片的生成<br>首先，推導出CVAE的objective function:<br><img src="/Personal-Project/DLP/CVAE_math.png" alt="CVAE Math"><br>接著，基於CNN建構出CVAE，模型架構如下:<br><img src="/Personal-Project/DLP/CVAE.png" alt="CVAE"><br>使用CVAE，以肢體骨架圖以及前一幀的影片內容生成影片的下一幀。也就是，在inferece時，可以使用單張frame跟任意數量的骨架圖片生成出一整段的影片<br>另外，也實作對於loss的adaptive adjustment，這裡實作對於KL Divergence的Annealing。</p>
+<p>reference paper: <a href="https://arxiv.org/abs/1808.07371">Everybody Dance Now</a>、<a href="https://arxiv.org/abs/1802.07687">Stochastic Video Generation with a Learned Prior</a>、<a href="https://arxiv.org/abs/1903.10145">Cyclical Annealing Schedule</a></p>
+<h2 id="Image-Inpainting"><a href="#Image-Inpainting" class="headerlink" title="Image Inpainting"></a>Image Inpainting</h2><p>建構基於Transformer的Masked Generative Image Transformer(MaskGIT)，可以對於部分有缺漏(被mask住)的圖片的inpainting，如圖:<br><img src="/Personal-Project/DLP/MaskGIT_result.png" alt="Inpaint Result"><br>建構的MaskGIT架構如圖:<br><img src="/Personal-Project/DLP/MaskGIT.png" alt="MaskGIT"><br>將圖片encode成一張小圖，並且做離散化的Tokenize，限制embedding的可能性，讓模型更容易去model embedding space。接著使用Transformer來做inpainting，把其中的mask token補成其他的token，再用Decoder還原回圖片。</p>
+<p>reference paper: <a href="https://arxiv.org/abs/2202.04200">MaskGIT</a></p>
+<h2 id="Conditional-Image-Generation"><a href="#Conditional-Image-Generation" class="headerlink" title="Conditional Image Generation"></a>Conditional Image Generation</h2><p>使用Hugging Face API來建構Diffusion Model及其model pipeline，基於種類的Condition來生成幾何體，如圖:<br><img src="/Personal-Project/DLP/Geometry.png" alt="Geometry"></p>
+<p>reference paper: <a href="https://arxiv.org/abs/2006.11239">DDPM</a></p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/NYCU-DLP">https://github.com/youzhe0305/NYCU-DLP</a><br>裡面有完整的程式碼及報告</p>
 ]]></content>
       <categories>
-        <category>Team-Project</category>
+        <category>Personal-Project</category>
       </categories>
       <tags>
-        <tag>Crawler</tag>
-        <tag>Discord Bot</tag>
         <tag>Python</tag>
-        <tag>RSS</tag>
+        <tag>Deep Learning</tag>
+        <tag>Computer Vision</tag>
+        <tag>Generative</tag>
+        <tag>Diffusion</tag>
+        <tag>Transformer</tag>
+        <tag>AE</tag>
+        <tag>VAE</tag>
+        <tag>UNet</tag>
+        <tag>ResNet</tag>
+        <tag>CNN</tag>
       </tags>
   </entry>
   <entry>
