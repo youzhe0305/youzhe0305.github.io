@@ -90,55 +90,6 @@
       </tags>
   </entry>
   <entry>
-    <title>LLM輔助論文檢索機器人</title>
-    <url>/Team-Project/LLM-paper-search/</url>
-    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作”論文綜整與檢索的Discord Bot”。透過selenium爬蟲收集最新的論文並解析其內容。利用RAG LLM技術，以本地資料庫的形式供LLM搜索，讓LLM可以檢索出符合使用者需求敘述且足夠新的論文，最後以discord Bot的方式製作使用者介面，與使用者互動及呈現資料。</p>
-<h3 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h3><ul>
-<li>Crawler<ul>
-<li>selenium   </li>
-</ul>
-</li>
-<li>LLM<ul>
-<li>LangChain</li>
-</ul>
-</li>
-<li>Discord Bot</li>
-</ul>
-<p>示意圖:<br><img src="/Team-Project/LLM-paper-search/demo.png" alt=""></p>
-<p>介紹影片:<br><div class="video-container"><iframe src="https://www.youtube.com/embed/8r9ehgZSaWo" frameborder="0" loading="lazy" allowfullscreen></iframe></div></p>
-<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一下學期，修習”人工智慧概論”之專題<br>因為GPT3.5/4只有到2021/2023的資料庫，不足以供應最新的論文需求，因此製作此程式，用來提供最新論文的搜索。</p>
-<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>使用<strong>selenium</strong>製作爬蟲，把<strong>arXiv</strong>網站的<strong>2024</strong>年論文資料抓下來。目前只抓了title, abstract, link，因為如果存取全文，在搜索及資料庫建置上需要花上非常多的時間以及金錢，故只留下用來搜索的重要部分。</p>
-<h2 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h2><p>使用<strong>langchain</strong>做RAG LLM，採用<strong>GPT3.5</strong>模型，做了<strong>5種prompting enginerring</strong>，並另外做了無法搜索成功的例外處理。<br>使用者輸入任意的關鍵字、問題等，模型將自動將其轉換為搜尋論文的問題，並交由LLM模型在爬蟲得到的資料庫中搜索，回傳英文以及中文的’title, summery, tag, link’。</p>
-<h2 id="Discord-Bot"><a href="#Discord-Bot" class="headerlink" title="Discord Bot"></a>Discord Bot</h2><p>使用者介面，使用者可利用指令的方式，給予模型輸入，模型會以Discord Channel Message的方式做出回覆，並且有中英文翻譯的功能。</p>
-<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p>主要採用3種評估方式: 格式正確率、內容正確率、內容相關率</p>
-<ul>
-<li>格式正確率: 輸出是否與預期格式相符</li>
-<li>內容正確率: 內容是否全部正確，沒有編造、錯誤訊息</li>
-<li>內容相關率: 內容是否與使用者的問題相關</li>
-</ul>
-<p>評估結果:</p>
-<ul>
-<li>格式正確率: 93.3%(28/30)</li>
-<li>內容正確率: 13.3%(4/30)</li>
-<li>內容相關率: 96.6%(29/30)</li>
-</ul>
-<p>註: 內容正確率中，分析30次試驗發現title、summery、tag都沒有出錯，出錯的部分都是link</p>
-<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p><strong>我: 關於LLM的全部工作，串接LLM與爬蟲、Discord Bot</strong><br>組員1: 製作爬蟲，爬取資料<br>組員2: 製作Disocrd Bot介面</p>
-<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Intro-AI-Final-Project">https://github.com/youzhe0305/Intro-AI-Final-Project</a><br>裡面有完整的程式碼(不含資料庫)，以及報告、簡報</p>
-]]></content>
-      <categories>
-        <category>Team-Project</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>LLM</tag>
-        <tag>RAG</tag>
-        <tag>Crawler</tag>
-        <tag>Discord Bot</tag>
-        <tag>Bot</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>深度學習與實驗(6項project)</title>
     <url>/Personal-Project/DLP/</url>
     <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案為深度學習課程(DLP)作業，包含以下6個主題及技術</p>
@@ -200,26 +151,52 @@
       </tags>
   </entry>
   <entry>
-    <title>Real-Time DSTNet</title>
-    <url>/Team-Project/Real-Time-DSTNet/</url>
-    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案對於CVRP 2023的論文Deep Discriminative Spatial and Temporal Network for Efficient Video Deblurring(DSTNet)進行改進。該作品提出了創新的模型架構，用來做影像去模糊的修復，但是原本的work只能在獲取完整時間段的影像後，才能做影像去模糊，並且inference的速度不夠快。<br>而我們將其改進成Online架構，可以在新的frame進入時，即時做去模糊，並把inference的時間縮短至0.027 frame/s (37 fps)，並且建了一個系統來做即時去模糊。</p>
-<h2 id="Project-Post"><a href="#Project-Post" class="headerlink" title="Project Post:"></a>Project Post:</h2><p><img src="/Team-Project/Real-Time-DSTNet/Real_Time_DSTNet_Poster.png" alt="Real-Time DSTNet Poster"></p>
-<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一暑期，修習”深度學習(DLP)”之專題</p>
-<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Origin-Model"><a href="#Origin-Model" class="headerlink" title="Origin Model"></a>Origin Model</h2><p><img src="/Team-Project/Real-Time-DSTNet/DSTNet.png" alt="DSTNet"><br>原本的模型架構使用Wavelet Transformation降低圖片解析度，並且使用CNN + RNN的架構，組成CWGDN, DTFF, Wavelet FP三個主要component，用來做時間空間上的資訊融合，並以融合後的資訊去做影像去模糊，達到影像去模糊的SOTA。</p>
-<h2 id="Modification"><a href="#Modification" class="headerlink" title="Modification"></a>Modification</h2><p>將原本模型架構的Bidirection RNN修改為Unidirection RNN，使其能夠做到Online inference，不需要依賴完整前後文的影片內容。讓他能夠每輸入一個frame就處理一個frame，也降低參數量，讓他的inference速度更快，如圖:<br><img src="/Team-Project/Real-Time-DSTNet/Uni_RNN.png" alt="Uni RNN"><br>接著，對於原本的model加入一個Encoder，用來做減少參數後的RNN的調校，使其去模糊的表現更好。<br>整體的model architecture如下:<br><img src="/Team-Project/Real-Time-DSTNet/RT_DSTNet.png" alt="Real-Time DSTNet"></p>
-<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p><img src="/Team-Project/Real-Time-DSTNet/result.png" alt="alt text"><br>在performance上，犧牲了約2.2點的PSNR，但讓處理單一frame的速度提升到400%，得到了有效果的trade off。</p>
-<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p><strong>我: paper survey、Real-Time DSTNet演算法撰寫、Demo系統撰寫</strong><br>組員1: paper survey、Real-Time DSTNet的參數測試、DSTNet實驗數據產出<br>組員2: paper survey</p>
-<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Real-Time-DSTNet">https://github.com/youzhe0305/Real-Time-DSTNet</a><br>裡面有完整的程式碼、報告、簡報</p>
+    <title>LLM輔助論文檢索機器人</title>
+    <url>/Team-Project/LLM-paper-search/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作”論文綜整與檢索的Discord Bot”。透過selenium爬蟲收集最新的論文並解析其內容。利用RAG LLM技術，以本地資料庫的形式供LLM搜索，讓LLM可以檢索出符合使用者需求敘述且足夠新的論文，最後以discord Bot的方式製作使用者介面，與使用者互動及呈現資料。</p>
+<h3 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h3><ul>
+<li>Crawler<ul>
+<li>selenium   </li>
+</ul>
+</li>
+<li>LLM<ul>
+<li>LangChain</li>
+</ul>
+</li>
+<li>Discord Bot</li>
+</ul>
+<p>示意圖:<br><img src="/Team-Project/LLM-paper-search/demo.png" alt=""></p>
+<p>介紹影片:<br><div class="video-container"><iframe src="https://www.youtube.com/embed/8r9ehgZSaWo" frameborder="0" loading="lazy" allowfullscreen></iframe></div></p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一下學期，修習”人工智慧概論”之專題<br>因為GPT3.5/4只有到2021/2023的資料庫，不足以供應最新的論文需求，因此製作此程式，用來提供最新論文的搜索。</p>
+<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>使用<strong>selenium</strong>製作爬蟲，把<strong>arXiv</strong>網站的<strong>2024</strong>年論文資料抓下來。目前只抓了title, abstract, link，因為如果存取全文，在搜索及資料庫建置上需要花上非常多的時間以及金錢，故只留下用來搜索的重要部分。</p>
+<h2 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h2><p>使用<strong>langchain</strong>做RAG LLM，採用<strong>GPT3.5</strong>模型，做了<strong>5種prompting enginerring</strong>，並另外做了無法搜索成功的例外處理。<br>使用者輸入任意的關鍵字、問題等，模型將自動將其轉換為搜尋論文的問題，並交由LLM模型在爬蟲得到的資料庫中搜索，回傳英文以及中文的’title, summery, tag, link’。</p>
+<h2 id="Discord-Bot"><a href="#Discord-Bot" class="headerlink" title="Discord Bot"></a>Discord Bot</h2><p>使用者介面，使用者可利用指令的方式，給予模型輸入，模型會以Discord Channel Message的方式做出回覆，並且有中英文翻譯的功能。</p>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p>主要採用3種評估方式: 格式正確率、內容正確率、內容相關率</p>
+<ul>
+<li>格式正確率: 輸出是否與預期格式相符</li>
+<li>內容正確率: 內容是否全部正確，沒有編造、錯誤訊息</li>
+<li>內容相關率: 內容是否與使用者的問題相關</li>
+</ul>
+<p>評估結果:</p>
+<ul>
+<li>格式正確率: 93.3%(28/30)</li>
+<li>內容正確率: 13.3%(4/30)</li>
+<li>內容相關率: 96.6%(29/30)</li>
+</ul>
+<p>註: 內容正確率中，分析30次試驗發現title、summery、tag都沒有出錯，出錯的部分都是link</p>
+<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p><strong>我: 關於LLM的全部工作，串接LLM與爬蟲、Discord Bot</strong><br>組員1: 製作爬蟲，爬取資料<br>組員2: 製作Disocrd Bot介面</p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Intro-AI-Final-Project">https://github.com/youzhe0305/Intro-AI-Final-Project</a><br>裡面有完整的程式碼(不含資料庫)，以及報告、簡報</p>
 ]]></content>
       <categories>
         <category>Team-Project</category>
       </categories>
       <tags>
-        <tag>RNN</tag>
-        <tag>Online</tag>
         <tag>Python</tag>
-        <tag>CNN</tag>
-        <tag>Video Deblur</tag>
+        <tag>LLM</tag>
+        <tag>RAG</tag>
+        <tag>Crawler</tag>
+        <tag>Discord Bot</tag>
+        <tag>Bot</tag>
       </tags>
   </entry>
   <entry>
@@ -284,6 +261,29 @@
         <tag>OOP</tag>
         <tag>DS</tag>
         <tag>Game</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Real-Time DSTNet</title>
+    <url>/Team-Project/Real-Time-DSTNet/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案對於CVRP 2023的論文Deep Discriminative Spatial and Temporal Network for Efficient Video Deblurring(DSTNet)進行改進。該作品提出了創新的模型架構，用來做影像去模糊的修復，但是原本的work只能在獲取完整時間段的影像後，才能做影像去模糊，並且inference的速度不夠快。<br>而我們將其改進成Online架構，可以在新的frame進入時，即時做去模糊，並把inference的時間縮短至0.027 frame/s (37 fps)，並且建了一個系統來做即時去模糊。</p>
+<h2 id="Project-Post"><a href="#Project-Post" class="headerlink" title="Project Post:"></a>Project Post:</h2><p><img src="/Team-Project/Real-Time-DSTNet/Real_Time_DSTNet_Poster.png" alt="Real-Time DSTNet Poster"></p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一暑期，修習”深度學習(DLP)”之專題</p>
+<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Origin-Model"><a href="#Origin-Model" class="headerlink" title="Origin Model"></a>Origin Model</h2><p><img src="/Team-Project/Real-Time-DSTNet/DSTNet.png" alt="DSTNet"><br>原本的模型架構使用Wavelet Transformation降低圖片解析度，並且使用CNN + RNN的架構，組成CWGDN, DTFF, Wavelet FP三個主要component，用來做時間空間上的資訊融合，並以融合後的資訊去做影像去模糊，達到影像去模糊的SOTA。</p>
+<h2 id="Modification"><a href="#Modification" class="headerlink" title="Modification"></a>Modification</h2><p>將原本模型架構的Bidirection RNN修改為Unidirection RNN，使其能夠做到Online inference，不需要依賴完整前後文的影片內容。讓他能夠每輸入一個frame就處理一個frame，也降低參數量，讓他的inference速度更快，如圖:<br><img src="/Team-Project/Real-Time-DSTNet/Uni_RNN.png" alt="Uni RNN"><br>接著，對於原本的model加入一個Encoder，用來做減少參數後的RNN的調校，使其去模糊的表現更好。<br>整體的model architecture如下:<br><img src="/Team-Project/Real-Time-DSTNet/RT_DSTNet.png" alt="Real-Time DSTNet"></p>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p><img src="/Team-Project/Real-Time-DSTNet/result.png" alt="alt text"><br>在performance上，犧牲了約2.2點的PSNR，但讓處理單一frame的速度提升到400%，得到了有效果的trade off。</p>
+<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p><strong>我: paper survey、Real-Time DSTNet演算法撰寫、Demo系統撰寫</strong><br>組員1: paper survey、Real-Time DSTNet的參數測試、DSTNet實驗數據產出<br>組員2: paper survey</p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Real-Time-DSTNet">https://github.com/youzhe0305/Real-Time-DSTNet</a><br>裡面有完整的程式碼、報告、簡報</p>
+]]></content>
+      <categories>
+        <category>Team-Project</category>
+      </categories>
+      <tags>
+        <tag>RNN</tag>
+        <tag>Online</tag>
+        <tag>Python</tag>
+        <tag>CNN</tag>
+        <tag>Video Deblur</tag>
       </tags>
   </entry>
 </search>
