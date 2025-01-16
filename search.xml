@@ -25,7 +25,7 @@
 <h2 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h2><p>可以用關鍵字搜尋動畫<br>如圖，搜尋”輝夜”，可以看到”輝夜姬想讓人告白”、”輝夜姬物語”等等的動畫<br><img src="/Team-Project/Anime-Helper/search.png" alt="Search"></p>
 <h2 id="Auth"><a href="#Auth" class="headerlink" title="Auth"></a>Auth</h2><p>可以申請帳號、登入登出，利用token保持登入狀態，以使用一些使用者專用的功能(收藏、評分、留言等等)<br>如圖，可以登入並且查看使用者介面<br><img src="/Team-Project/Anime-Helper/auth.png" alt="Auth"></p>
 <h2 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h2><p>每一個動畫都會有一個主頁，這個主頁呈現了動畫的名稱、評分、播出時間、集數、敘述…等訊息，如圖:<br><img src="/Team-Project/Anime-Helper/info.png" alt="Information"></p>
-<h2 id="Favorite"><a href="#Favorite" class="headerlink" title="Favorite"></a>Favorite</h2><p>在動畫的主頁中，可以將動畫加入快速收藏清單中，或者是依據選單，加入自定義的清單中，如圖:<br><img src="/Team-Project/Anime-Helper/favorite1.png" alt="Favorite1"><br>而從首頁可以進到收藏清單的頁面，可以看到自己的各個收藏清單及動畫，並且連結到動畫的資訊頁面<br><img src="/Team-Project/Anime-Helper/favorite2.png" alt="Favorite2"></p>
+<h2 id="Favorite"><a href="#Favorite" class="headerlink" title="Favorite"></a>Favorite</h2><p>在動畫的主頁中，可以將動畫加入快速收藏清單中，或者是依據選單，加入自定義的清單中，如圖:<br><img src="/Team-Project/Anime-Helper/favorite1.png" alt="Favorite1"><br>而從首頁可以進到收藏清單的頁面，可以看到自己的各個收藏清單及動畫，並且連結到動畫的資訊頁面<br><img src="/Team-Project/Anime-Helper/favorite_c.png" alt="Favorite2"></p>
 <h2 id="Grading"><a href="#Grading" class="headerlink" title="Grading"></a>Grading</h2><p>在動畫的主頁中，可以透過點擊星星的方式，給予動畫評分，並且評分也會影響到主頁上呈現的動畫分數<br><img src="/Team-Project/Anime-Helper/grading.png" alt="Grading"></p>
 <h2 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h2><p>也可在喜歡的動畫的頁面下面留言或看到他人的留言，也有刪除留言的功能<br><img src="/Team-Project/Anime-Helper/comment.png" alt="Comment"></p>
 <h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p><strong>後端:</strong><br><strong>我: 資料清洗、資料庫建構、搜尋、收藏、留言API</strong><br>組員1: 資訊&amp;排序、分類、登入登出、評分API<br><strong>前端:</strong><br>組員2: 主頁、註冊登入、評分系統、留言<br>組員3: Favorite List製作、評分系統、註冊登入(介面)、Profile頁面<br>組員4: Favorite List製作、網頁排版</p>
@@ -200,6 +200,29 @@
       </tags>
   </entry>
   <entry>
+    <title>Real-Time DSTNet</title>
+    <url>/Team-Project/Real-Time-DSTNet/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案對於CVRP 2023的論文Deep Discriminative Spatial and Temporal Network for Efficient Video Deblurring(DSTNet)進行改進。該作品提出了創新的模型架構，用來做影像去模糊的修復，但是原本的work只能在獲取完整時間段的影像後，才能做影像去模糊，並且inference的速度不夠快。<br>而我們將其改進成Online架構，可以在新的frame進入時，即時做去模糊，並把inference的時間縮短至0.027 frame/s (37 fps)，並且建了一個系統來做即時去模糊。</p>
+<h2 id="Project-Post"><a href="#Project-Post" class="headerlink" title="Project Post:"></a>Project Post:</h2><p><img src="/Team-Project/Real-Time-DSTNet/Real_Time_DSTNet_Poster.png" alt="Real-Time DSTNet Poster"></p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一暑期，修習”深度學習(DLP)”之專題</p>
+<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Origin-Model"><a href="#Origin-Model" class="headerlink" title="Origin Model"></a>Origin Model</h2><p><img src="/Team-Project/Real-Time-DSTNet/DSTNet.png" alt="DSTNet"><br>原本的模型架構使用Wavelet Transformation降低圖片解析度，並且使用CNN + RNN的架構，組成CWGDN, DTFF, Wavelet FP三個主要component，用來做時間空間上的資訊融合，並以融合後的資訊去做影像去模糊，達到影像去模糊的SOTA。</p>
+<h2 id="Modification"><a href="#Modification" class="headerlink" title="Modification"></a>Modification</h2><p>將原本模型架構的Bidirection RNN修改為Unidirection RNN，使其能夠做到Online inference，不需要依賴完整前後文的影片內容。讓他能夠每輸入一個frame就處理一個frame，也降低參數量，讓他的inference速度更快，如圖:<br><img src="/Team-Project/Real-Time-DSTNet/Uni_RNN.png" alt="Uni RNN"><br>接著，對於原本的model加入一個Encoder，用來做減少參數後的RNN的調校，使其去模糊的表現更好。<br>整體的model architecture如下:<br><img src="/Team-Project/Real-Time-DSTNet/RT_DSTNet.png" alt="Real-Time DSTNet"></p>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p><img src="/Team-Project/Real-Time-DSTNet/result.png" alt="alt text"><br>在performance上，犧牲了約2.2點的PSNR，但讓處理單一frame的速度提升到400%，得到了有效果的trade off。</p>
+<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p><strong>我: paper survey、Real-Time DSTNet演算法撰寫、Demo系統撰寫</strong><br>組員1: paper survey、Real-Time DSTNet的參數測試、DSTNet實驗數據產出<br>組員2: paper survey</p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Real-Time-DSTNet">https://github.com/youzhe0305/Real-Time-DSTNet</a><br>裡面有完整的程式碼、報告、簡報</p>
+]]></content>
+      <categories>
+        <category>Team-Project</category>
+      </categories>
+      <tags>
+        <tag>RNN</tag>
+        <tag>Online</tag>
+        <tag>Python</tag>
+        <tag>CNN</tag>
+        <tag>Video Deblur</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>新聞推播Discord Bot</title>
     <url>/Team-Project/newspaper-dc-bot/</url>
     <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作 “定時推播新聞的Discord Bot”。透過bs4爬蟲、RSS每天收集最新新聞更新資料庫，並定期在Discord頻道做新聞的推播，使用者可以自選想看的新聞種類。新聞資訊將帶有標題、連結</p>
@@ -261,29 +284,6 @@
         <tag>OOP</tag>
         <tag>DS</tag>
         <tag>Game</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Real-Time DSTNet</title>
-    <url>/Team-Project/Real-Time-DSTNet/</url>
-    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案對於CVRP 2023的論文Deep Discriminative Spatial and Temporal Network for Efficient Video Deblurring(DSTNet)進行改進。該作品提出了創新的模型架構，用來做影像去模糊的修復，但是原本的work只能在獲取完整時間段的影像後，才能做影像去模糊，並且inference的速度不夠快。<br>而我們將其改進成Online架構，可以在新的frame進入時，即時做去模糊，並把inference的時間縮短至0.027 frame/s (37 fps)，並且建了一個系統來做即時去模糊。</p>
-<h2 id="Project-Post"><a href="#Project-Post" class="headerlink" title="Project Post:"></a>Project Post:</h2><p><img src="/Team-Project/Real-Time-DSTNet/Real_Time_DSTNet_Poster.png" alt="Real-Time DSTNet Poster"></p>
-<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一暑期，修習”深度學習(DLP)”之專題</p>
-<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Origin-Model"><a href="#Origin-Model" class="headerlink" title="Origin Model"></a>Origin Model</h2><p><img src="/Team-Project/Real-Time-DSTNet/DSTNet.png" alt="DSTNet"><br>原本的模型架構使用Wavelet Transformation降低圖片解析度，並且使用CNN + RNN的架構，組成CWGDN, DTFF, Wavelet FP三個主要component，用來做時間空間上的資訊融合，並以融合後的資訊去做影像去模糊，達到影像去模糊的SOTA。</p>
-<h2 id="Modification"><a href="#Modification" class="headerlink" title="Modification"></a>Modification</h2><p>將原本模型架構的Bidirection RNN修改為Unidirection RNN，使其能夠做到Online inference，不需要依賴完整前後文的影片內容。讓他能夠每輸入一個frame就處理一個frame，也降低參數量，讓他的inference速度更快，如圖:<br><img src="/Team-Project/Real-Time-DSTNet/Uni_RNN.png" alt="Uni RNN"><br>接著，對於原本的model加入一個Encoder，用來做減少參數後的RNN的調校，使其去模糊的表現更好。<br>整體的model architecture如下:<br><img src="/Team-Project/Real-Time-DSTNet/RT_DSTNet.png" alt="Real-Time DSTNet"></p>
-<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p><img src="/Team-Project/Real-Time-DSTNet/result.png" alt="alt text"><br>在performance上，犧牲了約2.2點的PSNR，但讓處理單一frame的速度提升到400%，得到了有效果的trade off。</p>
-<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p><strong>我: paper survey、Real-Time DSTNet演算法撰寫、Demo系統撰寫</strong><br>組員1: paper survey、Real-Time DSTNet的參數測試、DSTNet實驗數據產出<br>組員2: paper survey</p>
-<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Real-Time-DSTNet">https://github.com/youzhe0305/Real-Time-DSTNet</a><br>裡面有完整的程式碼、報告、簡報</p>
-]]></content>
-      <categories>
-        <category>Team-Project</category>
-      </categories>
-      <tags>
-        <tag>RNN</tag>
-        <tag>Online</tag>
-        <tag>Python</tag>
-        <tag>CNN</tag>
-        <tag>Video Deblur</tag>
       </tags>
   </entry>
 </search>
