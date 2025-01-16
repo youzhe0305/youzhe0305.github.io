@@ -1,6 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>深度學習與實驗(6項project)</title>
+    <url>/Personal-Project/DLP/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案為深度學習課程(DLP)作業，包含以下6個主題及技術</p>
+<ol>
+<li><strong>Handcraft Neural Network</strong><ul>
+<li>Backpropagation、Neural Network、numpy</li>
+</ul>
+</li>
+<li><strong>Iamge Classification</strong><ul>
+<li>CNN、SCCNet</li>
+</ul>
+</li>
+<li><strong>Image Segmentation</strong><ul>
+<li>UNet、ResNet</li>
+</ul>
+</li>
+<li><strong>Conditional Video Generation</strong><ul>
+<li>VAE、Video Generation</li>
+</ul>
+</li>
+<li><strong>Image Inpainting</strong><ul>
+<li>Transformer、MaskGIT</li>
+</ul>
+</li>
+<li><strong>Conditional Image Generation</strong><ul>
+<li>Diffusion</li>
+</ul>
+</li>
+</ol>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一暑假，修習”深度學習(DLP)”之作業</p>
+<h1 id="LAB"><a href="#LAB" class="headerlink" title="LAB"></a>LAB</h1><h2 id="Handcraft-Neural-Network"><a href="#Handcraft-Neural-Network" class="headerlink" title="Handcraft Neural Network"></a>Handcraft Neural Network</h2><p>在不使用Pytorch、Tensorflow等深度學習套件的情況下，使用Numpy刻出一個神經網路。神經網路的架構圖如下:<br><img src="/Personal-Project/DLP/NN.png" alt="Neural Network"><br>實作基於矩陣的backpropagation，實作梯度的傳播，優化參數，進行資料點的分類<br>結果如下:<br><img src="/Personal-Project/DLP/NN_pred.png" alt="Data Point Prediction"></p>
+<h2 id="Iamge-Classification"><a href="#Iamge-Classification" class="headerlink" title="Iamge Classification"></a>Iamge Classification</h2><p>構造CNN，用來做基於腦電圖(EEG)的患者動作分類，使用Spatial Component-wise Convolutional Network(SCCNet)，網路架構圖如下:<br><img src="/Personal-Project/DLP/SCCNet.png" alt="SCCNet"><br>使用Pytorch實作，並且對於一般訓練及Fine-Tune等方式做分析</p>
+<p>reference paper: <a href="https://www.merl.com/publications/docs/TR2018-210.pdf">SCCNet</a></p>
+<h2 id="Image-Segmentation"><a href="#Image-Segmentation" class="headerlink" title="Image Segmentation"></a>Image Segmentation</h2><p>只使用Pytorch來構造UNet以及ResNet34-Unet，用來做寵物圖片的前後景image segmentataion，如圖:<br><img src="/Personal-Project/DLP/Image_segmentation.png" alt="Image_segmentation"><br>建構的網路架構如下:<br>UNet:<br><img src="/Personal-Project/DLP/Unet.png" alt="Unet"><br>Res34-UNet (以ResNet做Encoder，UNet做Decoder):<br><img src="/Personal-Project/DLP/Res34_UNet.png" alt="Res34-UNet"><br>另外也實作不同的Data Augmentation(包括UNet論文中使用的Elastic Transformation等等)</p>
+<p>reference paper: <a href="https://arxiv.org/abs/1505.04597v1">UNet</a>、<a href="https://www.researchgate.net/publication/359463249_Deep_learning-based_pelvic_levator_hiatus_segmentation_from_ultrasound_images">Res34-Unet</a></p>
+<h2 id="Conditional-Video-Generation"><a href="#Conditional-Video-Generation" class="headerlink" title="Conditional Video Generation"></a>Conditional Video Generation</h2><p>建構Conditional Varitional AutoEncoder (CVAE)模型，用來做圖片的生成<br>首先，推導出CVAE的objective function:<br><img src="/Personal-Project/DLP/CVAE_math.png" alt="CVAE Math"><br>接著，基於CNN建構出CVAE，模型架構如下:<br><img src="/Personal-Project/DLP/CVAE.png" alt="CVAE"><br>使用CVAE，以肢體骨架圖以及前一幀的影片內容生成影片的下一幀。也就是，在inferece時，可以使用單張frame跟任意數量的骨架圖片生成出一整段的影片<br>另外，也實作對於loss的adaptive adjustment，這裡實作對於KL Divergence的Annealing。</p>
+<p>reference paper: <a href="https://arxiv.org/abs/1808.07371">Everybody Dance Now</a>、<a href="https://arxiv.org/abs/1802.07687">Stochastic Video Generation with a Learned Prior</a>、<a href="https://arxiv.org/abs/1903.10145">Cyclical Annealing Schedule</a></p>
+<h2 id="Image-Inpainting"><a href="#Image-Inpainting" class="headerlink" title="Image Inpainting"></a>Image Inpainting</h2><p>建構基於Transformer的Masked Generative Image Transformer(MaskGIT)，可以對於部分有缺漏(被mask住)的圖片的inpainting，如圖:<br><img src="/Personal-Project/DLP/MaskGIT_result.png" alt="Inpaint Result"><br>建構的MaskGIT架構如圖:<br><img src="/Personal-Project/DLP/MaskGIT.png" alt="MaskGIT"><br>將圖片encode成一張小圖，並且做離散化的Tokenize，限制embedding的可能性，讓模型更容易去model embedding space。接著使用Transformer來做inpainting，把其中的mask token補成其他的token，再用Decoder還原回圖片。</p>
+<p>reference paper: <a href="https://arxiv.org/abs/2202.04200">MaskGIT</a></p>
+<h2 id="Conditional-Image-Generation"><a href="#Conditional-Image-Generation" class="headerlink" title="Conditional Image Generation"></a>Conditional Image Generation</h2><p>使用Hugging Face API來建構Diffusion Model及其model pipeline，基於種類的Condition來生成幾何體，如圖:<br><img src="/Personal-Project/DLP/Geometry.png" alt="Geometry"></p>
+<p>reference paper: <a href="https://arxiv.org/abs/2006.11239">DDPM</a></p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/NYCU-DLP">https://github.com/youzhe0305/NYCU-DLP</a><br>裡面有完整的程式碼及報告</p>
+]]></content>
+      <categories>
+        <category>Personal-Project</category>
+      </categories>
+      <tags>
+        <tag>Deep Learning</tag>
+        <tag>Computer Vision</tag>
+        <tag>Generative</tag>
+        <tag>Diffusion</tag>
+        <tag>Transformer</tag>
+        <tag>AE</tag>
+        <tag>VAE</tag>
+        <tag>UNet</tag>
+        <tag>ResNet</tag>
+        <tag>CNN</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Real-Time DSTNet</title>
+    <url>/Team-Project/Real-Time-DSTNet/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案對於CVRP 2023的論文Deep Discriminative Spatial and Temporal Network for Efficient Video Deblurring(DSTNet)進行改進。該作品提出了創新的模型架構，用來做影像去模糊的修復，但是原本的work只能在獲取完整時間段的影像後，才能做影像去模糊，並且inference的速度不夠快。<br>而我們將其改進成Online架構，可以在新的frame進入時，即時做去模糊，並把inference的時間縮短至0.027 frame/s (37 fps)，並且建了一個系統來做即時去模糊。</p>
+<h2 id="Project-Post"><a href="#Project-Post" class="headerlink" title="Project Post:"></a>Project Post:</h2><p><img src="/Team-Project/Real-Time-DSTNet/Real_Time_DSTNet_Poster.png" alt="Real-Time DSTNet Poster"></p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一暑期，修習”深度學習(DLP)”之專題</p>
+<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Origin-Model"><a href="#Origin-Model" class="headerlink" title="Origin Model"></a>Origin Model</h2><p><img src="/Team-Project/Real-Time-DSTNet/DSTNet.png" alt="DSTNet"><br>原本的模型架構使用Wavelet Transformation降低圖片解析度，並且使用CNN + RNN的架構，組成CWGDN, DTFF, Wavelet FP三個主要component，用來做時間空間上的資訊融合，並以融合後的資訊去做影像去模糊，達到影像去模糊的SOTA。</p>
+<h2 id="Modification"><a href="#Modification" class="headerlink" title="Modification"></a>Modification</h2><p>將原本模型架構的Bidirection RNN修改為Unidirection RNN，使其能夠做到Online inference，不需要依賴完整前後文的影片內容。讓他能夠每輸入一個frame就處理一個frame，也降低參數量，讓他的inference速度更快，如圖:<br><img src="/Team-Project/Real-Time-DSTNet/Uni_RNN.png" alt="Uni RNN"><br>接著，對於原本的model加入一個Encoder，用來做減少參數後的RNN的調校，使其去模糊的表現更好。<br>整體的model architecture如下:<br><img src="/Team-Project/Real-Time-DSTNet/RT_DSTNet.png" alt="Real-Time DSTNet"></p>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p><img src="/Team-Project/Real-Time-DSTNet/result.png" alt="alt text"><br>在performance上，犧牲了約2.2點的PSNR，但讓處理單一frame的速度提升到400%，得到了有效果的trade off。</p>
+<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p>我: paper survey、Real-Time DSTNet演算法撰寫、Demo系統撰寫<br>組員1: paper survey、Real-Time DSTNet的參數測試、DSTNet實驗數據產出<br>組員2: paper survey</p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Real-Time-DSTNet">https://github.com/youzhe0305/Real-Time-DSTNet</a><br>裡面有完整的程式碼、報告、簡報</p>
+]]></content>
+      <categories>
+        <category>Team-Project</category>
+      </categories>
+      <tags>
+        <tag>CNN</tag>
+        <tag>Python</tag>
+        <tag>Video Deblur</tag>
+        <tag>RNN</tag>
+        <tag>Online</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>新聞推播Discord Bot</title>
     <url>/Team-Project/newspaper-dc-bot/</url>
     <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作 “定時推播新聞的Discord Bot”。透過bs4爬蟲、RSS每天收集最新新聞更新資料庫，並定期在Discord頻道做新聞的推播，使用者可以自選想看的新聞種類。新聞資訊將帶有標題、連結</p>
@@ -28,6 +112,40 @@
         <tag>Discord Bot</tag>
         <tag>Crawler</tag>
         <tag>RSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++ Text-Based Dungeon Game</title>
+    <url>/Personal-Project/text-based-dungeon-game/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作 “基於文字的地下城遊戲”，在遊戲中，將隨機生成的地下城，玩家需要擊敗裡面的所有怪物及探索完所有房間以獲得勝利</p>
+<p>遊戲採用回合制戰鬥，設有裝備系統與技能系統，設計了25種裝備以及10種技能，每種技能都有自己的戰吼效果，以及不同的傷害計算、buff疊加效果</p>
+<p>在地下城中，會遇到不同的怪物，打敗怪物時，可以從怪物身上學到技能，也有菁英怪，可以學到特別強力的技能。 一路上也會遇到不同的NPC，可以與之交易，或是觸發NPC特殊劇情，學會特殊技能。</p>
+<h2 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h2><ul>
+<li>C++</li>
+<li>OOP (Object-Oriented Programming)</li>
+<li>DS (Data Structure)</li>
+</ul>
+<p>示意圖:<br><img src="/Personal-Project/text-based-dungeon-game/dungeon_room.png" alt=""><br><img src="/Personal-Project/text-based-dungeon-game/dungeon_battle.png" alt=""></p>
+<p>介紹影片:<br><div class="video-container"><iframe src="https://www.youtube.com/embed/GfCF2AjKM00" frameborder="0" loading="lazy" allowfullscreen></iframe></div></p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一下學期，修習”資料結構與物件導向程式設計”之作業，要求使用C++及物件導向方法，建構一個地下城的遊戲。</p>
+<h1 id="Feature"><a href="#Feature" class="headerlink" title="Feature"></a>Feature</h1><h2 id="Item"><a href="#Item" class="headerlink" title="Item"></a>Item</h2><p>有<strong>3類共25種的物品</strong>，分別為 藥水、食物、裝備，可以從寶箱或是NPC得到。</p>
+<h2 id="Skill"><a href="#Skill" class="headerlink" title="Skill"></a>Skill</h2><p>有<strong>10種技能</strong>，使用virtual function讓每個技能能有不同的傷害計算公式<br>每種技能都有<strong>獨特施放效果(戰吼)</strong>，並且不同技能會帶來<strong>5種不同的buff</strong>。</p>
+<h2 id="Arena"><a href="#Arena" class="headerlink" title="Arena"></a>Arena</h2><p>以回合制式呈現現，可在戰鬥中施放技能、使用物品、逃跑等等。<br>打贏怪物後，怪物會掉落經驗值，並且玩家有<strong>機率學到怪物的技能</strong></p>
+<h2 id="Room"><a href="#Room" class="headerlink" title="Room"></a>Room</h2><p>有怪物、寶箱、NPC等物件可互動。且怪物的生成隨著玩家等級，強度會改變。<br>有<strong>4種不同的房間</strong>，每種房間有對應的房間事件，在進入房間時有機會觸發，帶來不同的效果及buff, debuff。</p>
+<h2 id="NPC"><a href="#NPC" class="headerlink" title="NPC"></a>NPC</h2><p>有<strong>2種NPC</strong>：商人以及特殊NPC<br>玩家可以與商人交易，獲得裝備、藥水、食物，商人販售的物品是隨機決定，有機會從裡面買到很好的物品。<br>特殊NPC則會觸發<strong>特殊事件</strong>，有劇情，並且在劇情結束後，玩家會從特殊NPC身上學到技能。</p>
+<h2 id="Monster"><a href="#Monster" class="headerlink" title="Monster"></a>Monster</h2><p>實作了<strong>5種不同的怪物</strong>，每種怪物有不同的數值成長曲線，並且各自擁有獨特的技能。<br>其中也包含了精英怪物，擁有combo類型的技能，為地下城中的一大挑戰。</p>
+<h2 id="Player"><a href="#Player" class="headerlink" title="Player"></a>Player</h2><p>實作了 背包系統、裝備系統、等級系統，讓玩家可以如一般RPG一樣，做物品的裝備、使用，並且能透過打怪升級。</p>
+<h1 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h1><p><img src="/Personal-Project/text-based-dungeon-game/dungeon_UML.jpg" alt=""></p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Text-Based-Dungeon-Game">https://github.com/youzhe0305/Text-Based-Dungeon-Game</a><br>裡面有完整的程式碼，以及報告、簡報</p>
+]]></content>
+      <categories>
+        <category>Personal-Project</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>OOP</tag>
+        <tag>DS</tag>
+        <tag>Game</tag>
       </tags>
   </entry>
   <entry>
@@ -77,101 +195,6 @@
         <tag>LLM</tag>
         <tag>RAG</tag>
         <tag>Bot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>深度學習與實驗(6項project)</title>
-    <url>/Personal-Project/DLP/</url>
-    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案為深度學習課程(DLP)作業，包含以下6個主題及技術</p>
-<ol>
-<li><strong>Handcraft Neural Network</strong><ul>
-<li>Backpropagation、Neural Network、numpy</li>
-</ul>
-</li>
-<li><strong>Iamge Classification</strong><ul>
-<li>CNN、SCCNet</li>
-</ul>
-</li>
-<li><strong>Image Segmentation</strong><ul>
-<li>UNet、ResNet</li>
-</ul>
-</li>
-<li><strong>Conditional Video Generation</strong><ul>
-<li>VAE、Video Generation</li>
-</ul>
-</li>
-<li><strong>Image Inpainting</strong><ul>
-<li>Transformer、MaskGIT</li>
-</ul>
-</li>
-<li><strong>Conditional Image Generation</strong><ul>
-<li>Diffusion</li>
-</ul>
-</li>
-</ol>
-<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一暑假，修習”深度學習(DLP)”之作業</p>
-<h1 id="LAB"><a href="#LAB" class="headerlink" title="LAB"></a>LAB</h1><h2 id="Handcraft-Neural-Network"><a href="#Handcraft-Neural-Network" class="headerlink" title="Handcraft Neural Network"></a>Handcraft Neural Network</h2><p>在不使用Pytorch、Tensorflow等深度學習套件的情況下，使用Numpy刻出一個神經網路。神經網路的架構圖如下:<br><img src="/Personal-Project/DLP/NN.png" alt="Neural Network"><br>實作基於矩陣的backpropagation，實作梯度的傳播，優化參數，進行資料點的分類<br>結果如下:<br><img src="/Personal-Project/DLP/NN_pred.png" alt="Data Point Prediction"></p>
-<h2 id="Iamge-Classification"><a href="#Iamge-Classification" class="headerlink" title="Iamge Classification"></a>Iamge Classification</h2><p>構造CNN，用來做基於腦電圖(EEG)的患者動作分類，使用Spatial Component-wise Convolutional Network(SCCNet)，網路架構圖如下:<br><img src="/Personal-Project/DLP/SCCNet.png" alt="SCCNet"><br>使用Pytorch實作，並且對於一般訓練及Fine-Tune等方式做分析</p>
-<p>reference paper: <a href="https://www.merl.com/publications/docs/TR2018-210.pdf">SCCNet</a></p>
-<h2 id="Image-Segmentation"><a href="#Image-Segmentation" class="headerlink" title="Image Segmentation"></a>Image Segmentation</h2><p>只使用Pytorch來構造UNet以及ResNet34-Unet，用來做寵物圖片的前後景image segmentataion，如圖:<br><img src="/Personal-Project/DLP/Image_segmentation.png" alt="Image_segmentation"><br>建構的網路架構如下:<br>UNet:<br><img src="/Personal-Project/DLP/Unet.png" alt="Unet"><br>Res34-UNet (以ResNet做Encoder，UNet做Decoder):<br><img src="/Personal-Project/DLP/Res34_UNet.png" alt="Res34-UNet"><br>另外也實作不同的Data Augmentation(包括UNet論文中使用的Elastic Transformation等等)</p>
-<p>reference paper: <a href="https://arxiv.org/abs/1505.04597v1">UNet</a>、<a href="https://www.researchgate.net/publication/359463249_Deep_learning-based_pelvic_levator_hiatus_segmentation_from_ultrasound_images">Res34-Unet</a></p>
-<h2 id="Conditional-Video-Generation"><a href="#Conditional-Video-Generation" class="headerlink" title="Conditional Video Generation"></a>Conditional Video Generation</h2><p>建構Conditional Varitional AutoEncoder (CVAE)模型，用來做圖片的生成<br>首先，推導出CVAE的objective function:<br><img src="/Personal-Project/DLP/CVAE_math.png" alt="CVAE Math"><br>接著，基於CNN建構出CVAE，模型架構如下:<br><img src="/Personal-Project/DLP/CVAE.png" alt="CVAE"><br>使用CVAE，以肢體骨架圖以及前一幀的影片內容生成影片的下一幀。也就是，在inferece時，可以使用單張frame跟任意數量的骨架圖片生成出一整段的影片<br>另外，也實作對於loss的adaptive adjustment，這裡實作對於KL Divergence的Annealing。</p>
-<p>reference paper: <a href="https://arxiv.org/abs/1808.07371">Everybody Dance Now</a>、<a href="https://arxiv.org/abs/1802.07687">Stochastic Video Generation with a Learned Prior</a>、<a href="https://arxiv.org/abs/1903.10145">Cyclical Annealing Schedule</a></p>
-<h2 id="Image-Inpainting"><a href="#Image-Inpainting" class="headerlink" title="Image Inpainting"></a>Image Inpainting</h2><p>建構基於Transformer的Masked Generative Image Transformer(MaskGIT)，可以對於部分有缺漏(被mask住)的圖片的inpainting，如圖:<br><img src="/Personal-Project/DLP/MaskGIT_result.png" alt="Inpaint Result"><br>建構的MaskGIT架構如圖:<br><img src="/Personal-Project/DLP/MaskGIT.png" alt="MaskGIT"><br>將圖片encode成一張小圖，並且做離散化的Tokenize，限制embedding的可能性，讓模型更容易去model embedding space。接著使用Transformer來做inpainting，把其中的mask token補成其他的token，再用Decoder還原回圖片。</p>
-<p>reference paper: <a href="https://arxiv.org/abs/2202.04200">MaskGIT</a></p>
-<h2 id="Conditional-Image-Generation"><a href="#Conditional-Image-Generation" class="headerlink" title="Conditional Image Generation"></a>Conditional Image Generation</h2><p>使用Hugging Face API來建構Diffusion Model及其model pipeline，基於種類的Condition來生成幾何體，如圖:<br><img src="/Personal-Project/DLP/Geometry.png" alt="Geometry"></p>
-<p>reference paper: <a href="https://arxiv.org/abs/2006.11239">DDPM</a></p>
-<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/NYCU-DLP">https://github.com/youzhe0305/NYCU-DLP</a><br>裡面有完整的程式碼及報告</p>
-]]></content>
-      <categories>
-        <category>Personal-Project</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>Deep Learning</tag>
-        <tag>Computer Vision</tag>
-        <tag>Generative</tag>
-        <tag>Diffusion</tag>
-        <tag>Transformer</tag>
-        <tag>AE</tag>
-        <tag>VAE</tag>
-        <tag>UNet</tag>
-        <tag>ResNet</tag>
-        <tag>CNN</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++ Text-Based Dungeon Game</title>
-    <url>/Personal-Project/text-based-dungeon-game/</url>
-    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作 “基於文字的地下城遊戲”，在遊戲中，將隨機生成的地下城，玩家需要擊敗裡面的所有怪物及探索完所有房間以獲得勝利</p>
-<p>遊戲採用回合制戰鬥，設有裝備系統與技能系統，設計了25種裝備以及10種技能，每種技能都有自己的戰吼效果，以及不同的傷害計算、buff疊加效果</p>
-<p>在地下城中，會遇到不同的怪物，打敗怪物時，可以從怪物身上學到技能，也有菁英怪，可以學到特別強力的技能。 一路上也會遇到不同的NPC，可以與之交易，或是觸發NPC特殊劇情，學會特殊技能。</p>
-<h2 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h2><ul>
-<li>C++</li>
-<li>OOP (Object-Oriented Programming)</li>
-<li>DS (Data Structure)</li>
-</ul>
-<p>示意圖:<br><img src="/Personal-Project/text-based-dungeon-game/dungeon_room.png" alt=""><br><img src="/Personal-Project/text-based-dungeon-game/dungeon_battle.png" alt=""></p>
-<p>介紹影片:<br><div class="video-container"><iframe src="https://www.youtube.com/embed/GfCF2AjKM00" frameborder="0" loading="lazy" allowfullscreen></iframe></div></p>
-<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一下學期，修習”資料結構與物件導向程式設計”之作業，要求使用C++及物件導向方法，建構一個地下城的遊戲。</p>
-<h1 id="Feature"><a href="#Feature" class="headerlink" title="Feature"></a>Feature</h1><h2 id="Item"><a href="#Item" class="headerlink" title="Item"></a>Item</h2><p>有<strong>3類共25種的物品</strong>，分別為 藥水、食物、裝備，可以從寶箱或是NPC得到。</p>
-<h2 id="Skill"><a href="#Skill" class="headerlink" title="Skill"></a>Skill</h2><p>有<strong>10種技能</strong>，使用virtual function讓每個技能能有不同的傷害計算公式<br>每種技能都有<strong>獨特施放效果(戰吼)</strong>，並且不同技能會帶來<strong>5種不同的buff</strong>。</p>
-<h2 id="Arena"><a href="#Arena" class="headerlink" title="Arena"></a>Arena</h2><p>以回合制式呈現現，可在戰鬥中施放技能、使用物品、逃跑等等。<br>打贏怪物後，怪物會掉落經驗值，並且玩家有<strong>機率學到怪物的技能</strong></p>
-<h2 id="Room"><a href="#Room" class="headerlink" title="Room"></a>Room</h2><p>有怪物、寶箱、NPC等物件可互動。且怪物的生成隨著玩家等級，強度會改變。<br>有<strong>4種不同的房間</strong>，每種房間有對應的房間事件，在進入房間時有機會觸發，帶來不同的效果及buff, debuff。</p>
-<h2 id="NPC"><a href="#NPC" class="headerlink" title="NPC"></a>NPC</h2><p>有<strong>2種NPC</strong>：商人以及特殊NPC<br>玩家可以與商人交易，獲得裝備、藥水、食物，商人販售的物品是隨機決定，有機會從裡面買到很好的物品。<br>特殊NPC則會觸發<strong>特殊事件</strong>，有劇情，並且在劇情結束後，玩家會從特殊NPC身上學到技能。</p>
-<h2 id="Monster"><a href="#Monster" class="headerlink" title="Monster"></a>Monster</h2><p>實作了<strong>5種不同的怪物</strong>，每種怪物有不同的數值成長曲線，並且各自擁有獨特的技能。<br>其中也包含了精英怪物，擁有combo類型的技能，為地下城中的一大挑戰。</p>
-<h2 id="Player"><a href="#Player" class="headerlink" title="Player"></a>Player</h2><p>實作了 背包系統、裝備系統、等級系統，讓玩家可以如一般RPG一樣，做物品的裝備、使用，並且能透過打怪升級。</p>
-<h1 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h1><p><img src="/Personal-Project/text-based-dungeon-game/dungeon_UML.jpg" alt=""></p>
-<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Text-Based-Dungeon-Game">https://github.com/youzhe0305/Text-Based-Dungeon-Game</a><br>裡面有完整的程式碼，以及報告、簡報</p>
-]]></content>
-      <categories>
-        <category>Personal-Project</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>OOP</tag>
-        <tag>DS</tag>
-        <tag>Game</tag>
       </tags>
   </entry>
 </search>
