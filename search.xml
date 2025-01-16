@@ -44,6 +44,101 @@
       </tags>
   </entry>
   <entry>
+    <title>Berkeley CV (5項project)</title>
+    <url>/Personal-Project/Berkeley-CV/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案為學習電腦視覺的自主練習，以Bekerley CS194-26的電腦視覺課作業作為練習對象<br>包含以下5個主題及技術:</p>
+<ol>
+<li><strong>Image Aligment &amp; Colorize</strong><ul>
+<li>Image Aligmnet、Basic CV Package</li>
+</ul>
+</li>
+<li><strong>Image Sharpen &amp; Image Hybrid</strong><ul>
+<li>Space Frequency、Laplacian Pyramid、Multiresolution Spline</li>
+</ul>
+</li>
+<li><strong>Image Warping &amp; Midway Image</strong><ul>
+<li>Warping Matrix</li>
+</ul>
+</li>
+<li><strong>Image Stiching</strong><ul>
+<li>Warping Matrix、Image Blending</li>
+</ul>
+</li>
+<li><strong>Auto Image Stiching</strong><ul>
+<li>SIFT、RANSAC</li>
+</ul>
+</li>
+</ol>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>因為要做電腦視覺相關的研究，因此找Berkeley的公開作業來做練習，累積電腦視覺相關知識及技術經驗。</p>
+<h1 id="Projects"><a href="#Projects" class="headerlink" title="Projects"></a>Projects</h1><h2 id="Image-Aligment-amp-Colorize"><a href="#Image-Aligment-amp-Colorize" class="headerlink" title="Image Aligment &amp; Colorize"></a>Image Aligment &amp; Colorize</h2><p>把三張分別紀錄RGB channel資訊的圖片，使用loss function減小圖片疊合起來的差異，將圖片合併並且把顏色塗上<br>如圖，將RGB三通道圖對齊合併成彩色圖<br><img src="/Personal-Project/Berkeley-CV/lake.png" alt="Lake"></p>
+<h2 id="Image-Edge-Detection-amp-Image-Hybrid"><a href="#Image-Edge-Detection-amp-Image-Hybrid" class="headerlink" title="Image Edge Detection &amp; Image Hybrid"></a>Image Edge Detection &amp; Image Hybrid</h2><p>這個作業主要分成2部分</p>
+<p>第一部分是做圖片的銳化，銳化圖片的本質是加強邊界的效果，因此要先做edge dectection，利用圖片中的edge的顏色變化會很大的特性，以梯度、Difference of Gaussian (DoG) 等方法找出圖片的edge，效果如圖:<br><img src="/Personal-Project/Berkeley-CV/camera.png" alt="Camera"><br>接著再將得到的邊界依比例加成到原本的圖片上，即可達到圖片銳化的效果<br><img src="/Personal-Project/Berkeley-CV/taj.png" alt="TAJ"></p>
+<p>第二部分是做圖片的hybrid，首先使用Gaussian Kernel將圖片分成不同space frequency的Laplacian Pyramid，為了不同的空間頻率上做blending做準備。接著使用Multiresolution Spline的方法，因為分成不同resolution處理能對於細節或是整體去做不同的混合，因此分成不同resolution能讓邊界變得更不明顯。<br>如圖，把橘子跟蘋果混合，兩種水果間的邊界不明顯，且水果上的紋路是漸進變換的<br><img src="/Personal-Project/Berkeley-CV/hybrid.png" alt="Hybrid"></p>
+<h2 id="Image-Warping-amp-Midway-Image"><a href="#Image-Warping-amp-Midway-Image" class="headerlink" title="Image Warping &amp; Midway Image"></a>Image Warping &amp; Midway Image</h2><p>這個作業使用Warping Martix，根據不同圖片的對應點做圖片的形變，這個作業中，我手刻了Warping Matrix的計算，並且把兩張臉部表情的圖算出中間圖，讓他可以得到漸變的GIF，如下:<br><img src="/Personal-Project/Berkeley-CV/mid_way_face.gif" alt="Midway Face"></p>
+<h2 id="Image-Stiching"><a href="#Image-Stiching" class="headerlink" title="Image Stiching"></a>Image Stiching</h2><p>這個作業做的是場景的拼接，因為一個場景可能太大，不能用一張照片拍完，因此對於一個場景拍多個照片，再找到他們的對應點，就可以透過Warping Matrix形變，做場景的拼接。<br>如圖，我將我的書桌透過手動找特徵點的方式，拼接在一起:<br><img src="/Personal-Project/Berkeley-CV/desk.jpg" alt="Desk"><br>(看起來沒有很疊合是因為，Warping Matrix適用於2D空間，因此對於3D空間的書桌效果會稍微差一點)</p>
+<h2 id="Auto-Image-Stiching"><a href="#Auto-Image-Stiching" class="headerlink" title="Auto Image Stiching"></a>Auto Image Stiching</h2><p>承接上一個作業，但是這次不是手動點特徵點，而是使用SIFT算法自動尋找特徵點，再利用RANSAC算法來排除SIFT找到的outlier，讓Warping Matrix可以被計算的更精準:<br>如圖:<br><img src="/Personal-Project/Berkeley-CV/sift_desk.png" alt="SIFT Desk"><br><img src="/Personal-Project/Berkeley-CV/sift_box.png" alt="SIFT Box"></p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Berkeley-Intro-to-Computer-Vision-and-Computational-Photography">https://github.com/youzhe0305/Berkeley-Intro-to-Computer-Vision-and-Computational-Photography</a><br>裡面有完整的程式碼</p>
+]]></content>
+      <categories>
+        <category>Personal-Project</category>
+      </categories>
+      <tags>
+        <tag>Computer Vision</tag>
+        <tag>RNN</tag>
+        <tag>Online</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LLM輔助論文檢索機器人</title>
+    <url>/Team-Project/LLM-paper-search/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作”論文綜整與檢索的Discord Bot”。透過selenium爬蟲收集最新的論文並解析其內容。利用RAG LLM技術，以本地資料庫的形式供LLM搜索，讓LLM可以檢索出符合使用者需求敘述且足夠新的論文，最後以discord Bot的方式製作使用者介面，與使用者互動及呈現資料。</p>
+<h3 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h3><ul>
+<li>Crawler<ul>
+<li>selenium   </li>
+</ul>
+</li>
+<li>LLM<ul>
+<li>LangChain</li>
+</ul>
+</li>
+<li>Discord Bot</li>
+</ul>
+<p>示意圖:<br><img src="/Team-Project/LLM-paper-search/demo.png" alt=""></p>
+<p>介紹影片:<br><div class="video-container"><iframe src="https://www.youtube.com/embed/8r9ehgZSaWo" frameborder="0" loading="lazy" allowfullscreen></iframe></div></p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一下學期，修習”人工智慧概論”之專題<br>因為GPT3.5/4只有到2021/2023的資料庫，不足以供應最新的論文需求，因此製作此程式，用來提供最新論文的搜索。</p>
+<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>使用<strong>selenium</strong>製作爬蟲，把<strong>arXiv</strong>網站的<strong>2024</strong>年論文資料抓下來。目前只抓了title, abstract, link，因為如果存取全文，在搜索及資料庫建置上需要花上非常多的時間以及金錢，故只留下用來搜索的重要部分。</p>
+<h2 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h2><p>使用<strong>langchain</strong>做RAG LLM，採用<strong>GPT3.5</strong>模型，做了<strong>5種prompting enginerring</strong>，並另外做了無法搜索成功的例外處理。<br>使用者輸入任意的關鍵字、問題等，模型將自動將其轉換為搜尋論文的問題，並交由LLM模型在爬蟲得到的資料庫中搜索，回傳英文以及中文的’title, summery, tag, link’。</p>
+<h2 id="Discord-Bot"><a href="#Discord-Bot" class="headerlink" title="Discord Bot"></a>Discord Bot</h2><p>使用者介面，使用者可利用指令的方式，給予模型輸入，模型會以Discord Channel Message的方式做出回覆，並且有中英文翻譯的功能。</p>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p>主要採用3種評估方式: 格式正確率、內容正確率、內容相關率</p>
+<ul>
+<li>格式正確率: 輸出是否與預期格式相符</li>
+<li>內容正確率: 內容是否全部正確，沒有編造、錯誤訊息</li>
+<li>內容相關率: 內容是否與使用者的問題相關</li>
+</ul>
+<p>評估結果:</p>
+<ul>
+<li>格式正確率: 93.3%(28/30)</li>
+<li>內容正確率: 13.3%(4/30)</li>
+<li>內容相關率: 96.6%(29/30)</li>
+</ul>
+<p>註: 內容正確率中，分析30次試驗發現title、summery、tag都沒有出錯，出錯的部分都是link</p>
+<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p><strong>我: 關於LLM的全部工作，串接LLM與爬蟲、Discord Bot</strong><br>組員1: 製作爬蟲，爬取資料<br>組員2: 製作Disocrd Bot介面</p>
+<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Intro-AI-Final-Project">https://github.com/youzhe0305/Intro-AI-Final-Project</a><br>裡面有完整的程式碼(不含資料庫)，以及報告、簡報</p>
+]]></content>
+      <categories>
+        <category>Team-Project</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>LLM</tag>
+        <tag>RAG</tag>
+        <tag>Crawler</tag>
+        <tag>Discord Bot</tag>
+        <tag>Bot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>深度學習與實驗(6項project)</title>
     <url>/Personal-Project/DLP/</url>
     <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案為深度學習課程(DLP)作業，包含以下6個主題及技術</p>
@@ -91,8 +186,9 @@
         <category>Personal-Project</category>
       </categories>
       <tags>
-        <tag>Deep Learning</tag>
         <tag>Computer Vision</tag>
+        <tag>Python</tag>
+        <tag>Deep Learning</tag>
         <tag>Generative</tag>
         <tag>Diffusion</tag>
         <tag>Transformer</tag>
@@ -101,53 +197,6 @@
         <tag>UNet</tag>
         <tag>ResNet</tag>
         <tag>CNN</tag>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Berkeley CV (5項project)</title>
-    <url>/Personal-Project/Berkeley-CV/</url>
-    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案為學習電腦視覺的自主練習，以Bekerley CS194-26的電腦視覺課作業作為練習對象<br>包含以下5個主題及技術:</p>
-<ol>
-<li><strong>Image Aligment &amp; Colorize</strong><ul>
-<li>Image Aligmnet、Basic CV Package</li>
-</ul>
-</li>
-<li><strong>Image Sharpen &amp; Image Hybrid</strong><ul>
-<li>Space Frequency、Laplacian Pyramid、Multiresolution Spline</li>
-</ul>
-</li>
-<li><strong>Image Warping &amp; Midway Image</strong><ul>
-<li>Warping Matrix</li>
-</ul>
-</li>
-<li><strong>Image Stiching</strong><ul>
-<li>Warping Matrix、Image Blending</li>
-</ul>
-</li>
-<li><strong>Auto Image Stiching</strong><ul>
-<li>SIFT、RANSAC</li>
-</ul>
-</li>
-</ol>
-<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>因為要做電腦視覺相關的研究，因此找Berkeley的公開作業來做練習，累積電腦視覺相關知識及技術經驗。</p>
-<h1 id="Projects"><a href="#Projects" class="headerlink" title="Projects"></a>Projects</h1><h2 id="Image-Aligment-amp-Colorize"><a href="#Image-Aligment-amp-Colorize" class="headerlink" title="Image Aligment &amp; Colorize"></a>Image Aligment &amp; Colorize</h2><p>把三張分別紀錄RGB channel資訊的圖片，使用loss function減小圖片疊合起來的差異，將圖片合併並且把顏色塗上<br>如圖，將RGB三通道圖對齊合併成彩色圖<br><img src="/Personal-Project/Berkeley-CV/lake.png" alt="Lake"></p>
-<h2 id="Image-Edge-Detection-amp-Image-Hybrid"><a href="#Image-Edge-Detection-amp-Image-Hybrid" class="headerlink" title="Image Edge Detection &amp; Image Hybrid"></a>Image Edge Detection &amp; Image Hybrid</h2><p>這個作業主要分成2部分</p>
-<p>第一部分是做圖片的銳化，銳化圖片的本質是加強邊界的效果，因此要先做edge dectection，利用圖片中的edge的顏色變化會很大的特性，以梯度、Difference of Gaussian (DoG) 等方法找出圖片的edge，效果如圖:<br><img src="/Personal-Project/Berkeley-CV/camera.png" alt="Camera"><br>接著再將得到的邊界依比例加成到原本的圖片上，即可達到圖片銳化的效果<br><img src="/Personal-Project/Berkeley-CV/taj.png" alt="TAJ"></p>
-<p>第二部分是做圖片的hybrid，首先使用Gaussian Kernel將圖片分成不同space frequency的Laplacian Pyramid，為了不同的空間頻率上做blending做準備。接著使用Multiresolution Spline的方法，因為分成不同resolution處理能對於細節或是整體去做不同的混合，因此分成不同resolution能讓邊界變得更不明顯。<br>如圖，把橘子跟蘋果混合，兩種水果間的邊界不明顯，且水果上的紋路是漸進變換的<br><img src="/Personal-Project/Berkeley-CV/hybrid.png" alt="Hybrid"></p>
-<h2 id="Image-Warping-amp-Midway-Image"><a href="#Image-Warping-amp-Midway-Image" class="headerlink" title="Image Warping &amp; Midway Image"></a>Image Warping &amp; Midway Image</h2><p>這個作業使用Warping Martix，根據不同圖片的對應點做圖片的形變，這個作業中，我手刻了Warping Matrix的計算，並且把兩張臉部表情的圖算出中間圖，讓他可以得到漸變的GIF，如下:<br><img src="/Personal-Project/Berkeley-CV/mid_way_face.gif" alt="Midway Face"></p>
-<h2 id="Image-Stiching"><a href="#Image-Stiching" class="headerlink" title="Image Stiching"></a>Image Stiching</h2><p>這個作業做的是場景的拼接，因為一個場景可能太大，不能用一張照片拍完，因此對於一個場景拍多個照片，再找到他們的對應點，就可以透過Warping Matrix形變，做場景的拼接。<br>如圖，我將我的書桌透過手動找特徵點的方式，拼接在一起:<br><img src="/Personal-Project/Berkeley-CV/desk.jpg" alt="Desk"><br>(看起來沒有很疊合是因為，Warping Matrix適用於2D空間，因此對於3D空間的書桌效果會稍微差一點)</p>
-<h2 id="Auto-Image-Stiching"><a href="#Auto-Image-Stiching" class="headerlink" title="Auto Image Stiching"></a>Auto Image Stiching</h2><p>承接上一個作業，但是這次不是手動點特徵點，而是使用SIFT算法自動尋找特徵點，再利用RANSAC算法來排除SIFT找到的outlier，讓Warping Matrix可以被計算的更精準:<br>如圖:<br><img src="/Personal-Project/Berkeley-CV/sift_desk.png" alt="SIFT Desk"><br><img src="/Personal-Project/Berkeley-CV/sift_box.png" alt="SIFT Box"></p>
-<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Berkeley-Intro-to-Computer-Vision-and-Computational-Photography">https://github.com/youzhe0305/Berkeley-Intro-to-Computer-Vision-and-Computational-Photography</a><br>裡面有完整的程式碼</p>
-]]></content>
-      <categories>
-        <category>Personal-Project</category>
-      </categories>
-      <tags>
-        <tag>Computer Vision</tag>
-        <tag>Python</tag>
-        <tag>RNN</tag>
-        <tag>Online</tag>
       </tags>
   </entry>
   <entry>
@@ -166,10 +215,10 @@
         <category>Team-Project</category>
       </categories>
       <tags>
-        <tag>CNN</tag>
-        <tag>Python</tag>
         <tag>RNN</tag>
         <tag>Online</tag>
+        <tag>Python</tag>
+        <tag>CNN</tag>
         <tag>Video Deblur</tag>
       </tags>
   </entry>
@@ -198,58 +247,9 @@
       </categories>
       <tags>
         <tag>Python</tag>
-        <tag>Discord Bot</tag>
         <tag>Crawler</tag>
+        <tag>Discord Bot</tag>
         <tag>RSS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LLM輔助論文檢索機器人</title>
-    <url>/Team-Project/LLM-paper-search/</url>
-    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>此專案製作”論文綜整與檢索的Discord Bot”。透過selenium爬蟲收集最新的論文並解析其內容。利用RAG LLM技術，以本地資料庫的形式供LLM搜索，讓LLM可以檢索出符合使用者需求敘述且足夠新的論文，最後以discord Bot的方式製作使用者介面，與使用者互動及呈現資料。</p>
-<h3 id="CoreTech"><a href="#CoreTech" class="headerlink" title="CoreTech"></a>CoreTech</h3><ul>
-<li>Crawler<ul>
-<li>selenium   </li>
-</ul>
-</li>
-<li>LLM<ul>
-<li>LangChain</li>
-</ul>
-</li>
-<li>Discord Bot</li>
-</ul>
-<p>示意圖:<br><img src="/Team-Project/LLM-paper-search/demo.png" alt=""></p>
-<p>介紹影片:<br><div class="video-container"><iframe src="https://www.youtube.com/embed/8r9ehgZSaWo" frameborder="0" loading="lazy" allowfullscreen></iframe></div></p>
-<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>於大一下學期，修習”人工智慧概論”之專題<br>因為GPT3.5/4只有到2021/2023的資料庫，不足以供應最新的論文需求，因此製作此程式，用來提供最新論文的搜索。</p>
-<h1 id="Apporach"><a href="#Apporach" class="headerlink" title="Apporach"></a>Apporach</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>使用<strong>selenium</strong>製作爬蟲，把<strong>arXiv</strong>網站的<strong>2024</strong>年論文資料抓下來。目前只抓了title, abstract, link，因為如果存取全文，在搜索及資料庫建置上需要花上非常多的時間以及金錢，故只留下用來搜索的重要部分。</p>
-<h2 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h2><p>使用<strong>langchain</strong>做RAG LLM，採用<strong>GPT3.5</strong>模型，做了<strong>5種prompting enginerring</strong>，並另外做了無法搜索成功的例外處理。<br>使用者輸入任意的關鍵字、問題等，模型將自動將其轉換為搜尋論文的問題，並交由LLM模型在爬蟲得到的資料庫中搜索，回傳英文以及中文的’title, summery, tag, link’。</p>
-<h2 id="Discord-Bot"><a href="#Discord-Bot" class="headerlink" title="Discord Bot"></a>Discord Bot</h2><p>使用者介面，使用者可利用指令的方式，給予模型輸入，模型會以Discord Channel Message的方式做出回覆，並且有中英文翻譯的功能。</p>
-<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p>主要採用3種評估方式: 格式正確率、內容正確率、內容相關率</p>
-<ul>
-<li>格式正確率: 輸出是否與預期格式相符</li>
-<li>內容正確率: 內容是否全部正確，沒有編造、錯誤訊息</li>
-<li>內容相關率: 內容是否與使用者的問題相關</li>
-</ul>
-<p>評估結果:</p>
-<ul>
-<li>格式正確率: 93.3%(28/30)</li>
-<li>內容正確率: 13.3%(4/30)</li>
-<li>內容相關率: 96.6%(29/30)</li>
-</ul>
-<p>註: 內容正確率中，分析30次試驗發現title、summery、tag都沒有出錯，出錯的部分都是link</p>
-<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><p><strong>我: 關於LLM的全部工作，串接LLM與爬蟲、Discord Bot</strong><br>組員1: 製作爬蟲，爬取資料<br>組員2: 製作Disocrd Bot介面</p>
-<h1 id="Ohter"><a href="#Ohter" class="headerlink" title="Ohter"></a>Ohter</h1><p>本文僅簡單概述Project的部分成果，詳細的內容、分析詳見:<br><a href="https://github.com/youzhe0305/Intro-AI-Final-Project">https://github.com/youzhe0305/Intro-AI-Final-Project</a><br>裡面有完整的程式碼(不含資料庫)，以及報告、簡報</p>
-]]></content>
-      <categories>
-        <category>Team-Project</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>Discord Bot</tag>
-        <tag>Crawler</tag>
-        <tag>LLM</tag>
-        <tag>RAG</tag>
-        <tag>Bot</tag>
       </tags>
   </entry>
   <entry>
